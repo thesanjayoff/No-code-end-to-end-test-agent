@@ -36,9 +36,6 @@ function layout(title: string, body: string): string {
 </style>
 </head>
 <body>
-<nav><a href="/">Home</a><a href="/cart">Cart</a><a href="/login">Login</a><a href="/contact">Contact</a></nav>
-<h1>${title}</h1>
-${body}
 <script>
 function getCart() { try { return JSON.parse(localStorage.getItem('cart') || '[]'); } catch { return []; } }
 function setCart(c) { localStorage.setItem('cart', JSON.stringify(c)); }
@@ -50,6 +47,9 @@ function addToCart(id, name, price) {
   if (el) el.textContent = cart.length;
 }
 </script>
+<nav><a href="/">Home</a><a href="/cart">Cart</a><a href="/login">Login</a><a href="/contact">Contact</a></nav>
+<h1>${title}</h1>
+${body}
 </body>
 </html>`;
 }
