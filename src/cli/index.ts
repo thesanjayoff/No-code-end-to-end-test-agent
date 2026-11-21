@@ -19,6 +19,7 @@ import { addSchedule, listSchedules, removeSchedule, startSchedulerDaemon, runSc
 import { toJUnitXml } from "../reports/junit.js";
 import { renderHtmlReport } from "../reports/html.js";
 import { getTriage } from "../storage/repo.js";
+import { runExtraChecks } from "../checks/run.js";
 
 const program = new Command();
 program.name("testwise").description(`${APP_NAME} -- ${APP_TAGLINE}`).version("0.1.0");
@@ -376,6 +377,53 @@ report.command("cost").action(() => {
   console.log(`Total LLM spend: $${summary.totalCostUsd.toFixed(4)} across ${summary.calls} calls`);
   for (const [purpose, cost] of Object.entries(summary.byPurpose)) console.log(`  ${purpose}: $${cost.toFixed(4)}`);
 });
+
+// ---------- extra checks ----------
+
+program
+  .command("check <projectId> <url>")
+  .description("Run optional extra checks (accessibility, perf, links, visual) against a live, allow-listed page.")
+  .option("--axe", "run an axe-core accessibility scan")
+  .option("--perf", "capture navigation performance timing")
+  .option("--links", "check same-origin links (respects robots.txt)")
+  .option("--visual", "compare a full-page screenshot against its stored baseline")
+  .option("--approve-visual", "accept the current screenshot as the new baseline instead of diffing")
+  .option("--name <name>", "baseline name for --visual (defaults to the URL path)")
+  .action(async (projectId, url, opts) => {
+    const p = requireProject(projectId);
+    const absoluteUrl = /^https?:\/\//i.test(url) ? url : new URL(url, p.environments[p.defaultEnvironment]?.baseUrl).toString();
+    const result = await runExtraChecks({
+      project: p,
+      url: absoluteUrl,
+      axe: !!opts.axe,
+      perf: !!opts.perf,
+      links: !!opts.links,
+      visual: !!opts.visual,
+      visualName: opts.name,
+      approveVisual: !!opts.approveVisual,
+    });
+    console.log(chalk.bold(`Checks for ${result.url}`));
+    if (result.perf) {
+      console.log(chalk.cyan("\nPerformance:"));
+      console.log(`  DOMContentLoaded: ${result.perf.domContentLoadedMs.toFixed(0)}ms`);
+      console.log(`  load: ${result.perf.loadEventMs.toFixed(0)}ms`);
+      if (result.perf.firstContentfulPaintMs) console.log(`  FCP: ${result.perf.firstContentfulPaintMs.toFixed(0)}ms`);
+    }
+    if (result.axe) {
+      console.log(chalk.cyan(`\nAccessibility: ${result.axe.length} violation type(s)`));
+      result.axe.forEach((v) => console.log(`  [${v.impact ?? "?"}] ${v.id}: ${v.description} (${v.nodes} node(s))`));
+    }
+    if (result.links) {
+      const broken = result.links.filter((l) => !l.ok);
+      console.log(chalk.cyan(`\nLinks: ${result.links.length} checked, ${broken.length} broken`));
+      broken.forEach((l) => console.log(`  ${chalk.red(String(l.status))} ${l.url}`));
+    }
+    if (result.visual) {
+      if (result.visual.approvedChange) console.log(chalk.cyan("\nVisual: baseline updated."));
+      else if (!result.visual.baselineExisted) console.log(chalk.cyan("\nVisual: no baseline existed; this screenshot is now the baseline."));
+      else console.log(chalk.cyan(`\nVisual: ${(result.visual.diffRatio * 100).toFixed(2)}% of pixels differ from the baseline.`));
+    }
+  });
 
 // ---------- serve / seed ----------
 

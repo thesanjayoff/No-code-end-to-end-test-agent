@@ -10,6 +10,7 @@ projects/**/traces/
 projects/**/screenshots/
 projects/**/videos/
 projects/**/reports/
+projects/**/checks/
 .DS_Store
 Thumbs.db
 *.sqlite
