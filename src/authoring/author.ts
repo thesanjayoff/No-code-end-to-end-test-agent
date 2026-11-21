@@ -4,6 +4,7 @@ import YAML from "yaml";
 import { nanoid } from "nanoid";
 import type { ProjectConfig, TestDefinition } from "../types.js";
 import { parseTestSource, type TestSource } from "../parser/index.js";
+import { expandComponentReferences } from "./components.js";
 import { runResolution, type ResolveReport } from "../resolver/resolve.js";
 import { generateSpec, writeGeneratedFiles } from "../codegen/generate.js";
 import { evaluateDestructiveGuard } from "../safety/destructive.js";
@@ -41,7 +42,8 @@ export interface AuthorReport {
  * server's authoring endpoint call.
  */
 export async function authorTest(opts: AuthorOptions): Promise<AuthorReport> {
-  const parsed = parseTestSource(opts.source);
+  const expandedSteps = expandComponentReferences(opts.project.id, opts.source.steps);
+  const parsed = parseTestSource({ ...opts.source, steps: expandedSteps });
   const startUrl = resolveStartUrl(opts.source, opts.project);
 
   const destructive = evaluateDestructiveGuard(parsed.steps, opts.destructiveApproved ?? false);

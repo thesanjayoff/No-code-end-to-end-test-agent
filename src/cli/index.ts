@@ -13,6 +13,7 @@ import { triageRun } from "../triage/run.js";
 import { runStabilityCheck, flakeStatsFor } from "../flake/stability.js";
 import { proposeHeal, applyHeal, revertHeal, rejectHeal } from "../healer/heal.js";
 import { SecretVault } from "../safety/secrets.js";
+import { saveComponent, listComponents } from "../authoring/components.js";
 import { explore } from "../explore/explore.js";
 import { addSchedule, listSchedules, removeSchedule, startSchedulerDaemon, runScheduleNow } from "../scheduler/schedule.js";
 import { toJUnitXml } from "../reports/junit.js";
@@ -164,6 +165,25 @@ test
     console.log(JSON.stringify({ ...result, runs: undefined }, null, 2));
     console.log(result.stable ? chalk.green("STABLE") : chalk.red(`UNSTABLE -- flake rate ${(result.flakeRate * 100).toFixed(0)}%`));
   });
+
+// ---------- components ----------
+
+const component = program.command("component").description('Reusable step sequences, referenced from a test with a "use <name>" step.');
+
+component
+  .command("save <projectId> <name> <stepsFile>")
+  .description("stepsFile: a YAML/JSON file containing a top-level list of plain-English step sentences")
+  .action((projectId, name, stepsFile) => {
+    requireProject(projectId);
+    const steps = YAML.parse(fs.readFileSync(path.resolve(stepsFile), "utf-8"));
+    saveComponent(projectId, name, steps);
+    console.log(chalk.green(`Saved component "${name}" for project "${projectId}".`));
+  });
+
+component.command("list <projectId>").action((projectId) => {
+  requireProject(projectId);
+  listComponents(projectId).forEach((n) => console.log(n));
+});
 
 // ---------- heals ----------
 
