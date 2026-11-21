@@ -57,6 +57,11 @@ describe("step parser", () => {
     expect(result.steps[0]).toMatchObject({ action: "expect_count", expected: "3" });
   });
 
+  it("scopes a repeated-item click to its context", () => {
+    const result = parseTestSource({ title: "t", steps: ['click "Add to cart" for "Wireless Mouse"'] });
+    expect(result.steps[0]).toMatchObject({ action: "click", targetDescription: "Add to cart", contextDescription: "Wireless Mouse" });
+  });
+
   it("falls back to unknown for unparseable sentences with a warning", () => {
     const result = parseTestSource({ title: "t", steps: ["do the thing somehow"] });
     expect(result.steps[0].action).toBe("unknown");

@@ -31,6 +31,11 @@ function warnIfAmbiguous(target: string | undefined, warnings: string[]): void {
   }
 }
 
+// Matches a quoted string as one atomic token first, so a separator word
+// (e.g. "to") that happens to appear *inside* a quoted label or value --
+// "What needs to be done?" -- doesn't get mistaken for the real separator.
+const Q = `("[^"]*"|'[^']*'|[^"']+?)`;
+
 interface Rule {
   pattern: RegExp;
   action: StepAction;
@@ -46,19 +51,19 @@ const RULES: Rule[] = [
     build: (m) => ({ data: m[2].trim().replace(/^["“]|["”]$/g, "") }),
   },
   {
-    pattern: /^(fill|type|enter)\s+(.+?)\s+(with|as|to)\s+(.+)$/i,
+    pattern: new RegExp(`^(fill|type|enter)\\s+${Q}\\s+(with|as|to)\\s+(.+)$`, "i"),
     action: "fill",
     kind: "action",
-    build: (m) => ({ targetDescription: m[2].trim(), data: extractQuoted(m[4]).value ?? m[4].trim() }),
+    build: (m) => ({ targetDescription: extractQuoted(m[2]).value ?? m[2].trim(), data: extractQuoted(m[4]).value ?? m[4].trim() }),
   },
   {
-    pattern: /^(type|enter)\s+(.+?)\s+(into|in)\s+(.+)$/i,
+    pattern: new RegExp(`^(type|enter)\\s+${Q}\\s+(into|in)\\s+(.+)$`, "i"),
     action: "fill",
     kind: "action",
     build: (m) => ({ targetDescription: m[4].trim(), data: extractQuoted(m[2]).value ?? m[2].trim() }),
   },
   {
-    pattern: /^(select|choose|pick)\s+(.+?)\s+(from|in|for)\s+(.+)$/i,
+    pattern: new RegExp(`^(select|choose|pick)\\s+${Q}\\s+(from|in|for)\\s+(.+)$`, "i"),
     action: "select",
     kind: "action",
     build: (m) => ({ targetDescription: m[4].trim(), data: extractQuoted(m[2]).value ?? m[2].trim() }),
@@ -76,7 +81,7 @@ const RULES: Rule[] = [
     build: (m) => ({ targetDescription: m[1].trim() }),
   },
   {
-    pattern: /^upload\s+(.+?)\s+(?:to|into)\s+(.+)$/i,
+    pattern: new RegExp(`^upload\\s+${Q}\\s+(?:to|into)\\s+(.+)$`, "i"),
     action: "upload",
     kind: "action",
     build: (m) => ({ data: extractQuoted(m[1]).value ?? m[1].trim(), targetDescription: m[2].trim() }),
@@ -109,6 +114,14 @@ const RULES: Rule[] = [
       const ms = unit.startsWith("s") ? n * 1000 : n;
       return { data: String(ms) };
     },
+  },
+  {
+    // Disambiguates a repeated item, e.g. `click "Add to cart" for "Wireless Mouse"`:
+    // scopes the search to whichever item/row contains the context text.
+    pattern: new RegExp(`^(click|tap)\\s+${Q}\\s+for\\s+${Q}$`, "i"),
+    action: "click",
+    kind: "action",
+    build: (m) => ({ targetDescription: extractQuoted(m[2]).value ?? m[2].trim(), contextDescription: extractQuoted(m[3]).value ?? m[3].trim() }),
   },
   {
     pattern: /^(click|tap|press)(?:\s+on)?\s+(.+)$/i,

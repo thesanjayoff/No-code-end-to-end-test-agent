@@ -1,11 +1,12 @@
 import type { LocatorStrategy, ResolvedLocator } from "../types.js";
 
 /** Stability order requested by the spec: role+name, then label, then test id, then visible text, then CSS last. */
-const STRATEGY_ORDER: LocatorStrategy[] = ["role", "label", "testid", "text", "css"];
+const STRATEGY_ORDER: LocatorStrategy[] = ["role", "label", "placeholder", "testid", "text", "css"];
 
 const BASE_CONFIDENCE: Record<LocatorStrategy, number> = {
   role: 0.95,
   label: 0.9,
+  placeholder: 0.88,
   testid: 0.85,
   text: 0.6,
   css: 0.3,

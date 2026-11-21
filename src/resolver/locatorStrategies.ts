@@ -3,6 +3,9 @@ import type { LocatorCandidate } from "../locator/rank.js";
 
 const STOPWORDS = new Set(["the", "a", "an", "this", "that", "for", "on", "in", "my"]);
 
+/** Common "repeated item/row" container selectors, used to scope a "click X for Y" step to the right instance. */
+export const CONTEXT_CONTAINER_SELECTOR = 'li, tr, [class*="item" i], [class*="product" i], [class*="row" i], [class*="card" i]';
+
 const ROLE_HINTS: Array<{ keywords: string[]; role: string }> = [
   { keywords: ["button"], role: "button" },
   { keywords: ["link"], role: "link" },
@@ -49,7 +52,7 @@ function slugForTestId(description: string): string {
  */
 export function buildLocatorCandidates(description: string): Array<LocatorCandidate & { locate: (page: Page | Locator) => Locator }> {
   const { name, roleHint } = extractQuotedOrCore(description);
-  const testId = slugForTestId(description);
+  const testId = slugForTestId(name);
   const candidates: Array<LocatorCandidate & { locate: (page: Page | Locator) => Locator }> = [];
 
   const rolesToTry = roleHint ? [roleHint] : ["button", "link", "textbox", "checkbox", "combobox"];
@@ -72,6 +75,14 @@ export function buildLocatorCandidates(description: string): Array<LocatorCandid
   });
 
   candidates.push({
+    strategy: "placeholder",
+    code: `getByPlaceholder('${name.replace(/'/g, "\\'")}')`,
+    description: `placeholder="${name}"`,
+    matchCount: -1,
+    locate: (p) => p.getByPlaceholder(name, { exact: false }),
+  });
+
+  candidates.push({
     strategy: "testid",
     code: `getByTestId('${testId}')`,
     description: `data-testid="${testId}"`,
@@ -86,6 +97,19 @@ export function buildLocatorCandidates(description: string): Array<LocatorCandid
     matchCount: -1,
     locate: (p) => p.getByText(name, { exact: false }),
   });
+
+  // True last resort: guess a CSS id from the description's significant
+  // words. This only ever helps when it happens to match -- it's not ranked
+  // above anything else and a miss just falls out during candidate scoring.
+  if (testId) {
+    candidates.push({
+      strategy: "css",
+      code: `locator('#${testId}')`,
+      description: `css id="#${testId}"`,
+      matchCount: -1,
+      locate: (p) => p.locator(`#${testId}`),
+    });
+  }
 
   return candidates;
 }
