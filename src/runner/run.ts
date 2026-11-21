@@ -54,6 +54,15 @@ function collectSpecs(node: any, out: RawSpec[]): void {
   if (Array.isArray(node.suites)) for (const s of node.suites) collectSpecs(s, out);
 }
 
+// Playwright's JSON reporter carries terminal ANSI color codes inside
+// error.message (it reuses the same formatting used for console output).
+// Strip them so stored errors -- which feed the triage classifier, the
+// web UI, and reports -- are plain, readable text everywhere.
+function stripAnsi(s: string): string {
+  // eslint-disable-next-line no-control-regex
+  return s.replace(/\x1b\[[0-9;]*m/g, "");
+}
+
 function flattenSteps(steps: RawStep[] | undefined, out: StepRunResult[]): void {
   if (!steps) return;
   for (const s of steps) {
@@ -64,7 +73,7 @@ function flattenSteps(steps: RawStep[] | undefined, out: StepRunResult[]): void 
         sentence: m[2],
         status: s.error ? "failed" : "passed",
         durationMs: s.duration,
-        error: s.error?.message,
+        error: s.error?.message ? stripAnsi(s.error.message) : undefined,
       });
     }
     if (s.steps) flattenSteps(s.steps, out);
@@ -180,7 +189,7 @@ export async function runTests(opts: RunOptions): Promise<RunRecord[]> {
         networkErrors,
         stepResults,
         llmCallsUsed: 0,
-        error: last.error?.message,
+        error: last.error?.message ? stripAnsi(last.error.message) : undefined,
       });
     }
   }
