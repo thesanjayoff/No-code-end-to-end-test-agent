@@ -29,7 +29,7 @@ test('SauceDemo: locked-out user is rejected with an error', async ({ page }, te
   });
 
   await test.step("Step 4: expect the error message to show \"Sorry, this user has been locked out\"", async () => {
-    const assert4 = page.getByText("the error message");
+    const assert4 = page.getByText('Sorry, this user has been locked out');
     await expect(assert4.first()).toContainText('Sorry, this user has been locked out');
   });
   } finally {

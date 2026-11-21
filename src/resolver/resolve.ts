@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { chromium, type Browser, type Locator, type Page } from "playwright";
 import type { LocatorStrategy, ParsedStep, ProjectConfig, ResolvedStep } from "../types.js";
-import { buildLocatorCandidates, CONTEXT_CONTAINER_SELECTOR } from "./locatorStrategies.js";
+import { buildLocatorCandidates, buildExactTextCandidate, CONTEXT_CONTAINER_SELECTOR } from "./locatorStrategies.js";
 import { pickBest } from "../locator/rank.js";
 import { assertAllowListed, checkAllowListed } from "../safety/allowlist.js";
 import { evaluateDestructiveGuard } from "../safety/destructive.js";
@@ -264,7 +264,7 @@ export async function findTarget(page: Page, step: ParsedStep, ctx: StepResolveC
   // (a bare status/message region) while Y, its expected content, does --
   // so also try locating by the expected text itself, deterministically.
   if (step.action === "expect_text" && step.expected) {
-    candidates = [...candidates, ...buildLocatorCandidates(step.expected)];
+    candidates = [...candidates, buildExactTextCandidate(step.expected)];
   }
   if (step.contextDescription) {
     const context = step.contextDescription;
@@ -283,9 +283,23 @@ export async function findTarget(page: Page, step: ParsedStep, ctx: StepResolveC
   if (step.action === "check" || step.action === "uncheck") {
     candidates = candidates.filter((c) => c.strategy === "role" || c.strategy === "testid" || c.strategy === "label");
   }
-  const counted = await Promise.all(candidates.map(async (c) => ({ ...c, matchCount: await matchCount(page, c.locate) })));
+  const countAll = () => Promise.all(candidates.map(async (c) => ({ ...c, matchCount: await matchCount(page, c.locate) })));
+  let counted = await countAll();
   let { best, ranked, ambiguous } = pickBest(counted);
   let usedAi = false;
+
+  // A locator query's .count() returns the current DOM state with no
+  // auto-wait, unlike the click/assertion calls elsewhere in this file --
+  // so a step run immediately after a navigating action (e.g. right after
+  // a login button click) can race the page still rendering and see every
+  // candidate as a false zero. Retried once, after a short settle, only in
+  // the failure path (nothing already matched), so the common case pays no
+  // extra latency.
+  if (!best || ambiguous) {
+    await new Promise((r) => setTimeout(r, 400));
+    counted = await countAll();
+    ({ best, ranked, ambiguous } = pickBest(counted));
+  }
 
   if ((ambiguous || !best) && ctx.useAi) {
     const aiHint = await askLlmForTarget(page, description, ctx);
@@ -377,13 +391,19 @@ async function verifyAssertion(page: Page, step: ParsedStep, ctx: StepResolveCon
     const description = step.targetDescription ?? "";
     const expected = Number(step.expected ?? "0");
     const candidates = buildLocatorCandidates(description);
-    let chosen: { strategy: LocatorStrategy; code: string; description: string; count: number } | undefined;
-    for (const c of candidates) {
-      const n = await matchCount(page, c.locate);
-      if (n > 0) {
-        chosen = { strategy: c.strategy, code: c.code, description: c.description, count: n };
-        break;
+    const findFirstMatch = async () => {
+      for (const c of candidates) {
+        const n = await matchCount(page, c.locate);
+        if (n > 0) return { strategy: c.strategy, code: c.code, description: c.description, count: n };
       }
+      return undefined;
+    };
+    let chosen = await findFirstMatch();
+    // Same race as findTarget() above: .count() doesn't auto-wait, so retry
+    // once after a short settle before concluding nothing matches at all.
+    if (!chosen) {
+      await new Promise((r) => setTimeout(r, 400));
+      chosen = await findFirstMatch();
     }
     if (!chosen) {
       // Every candidate matched nothing at all -- if 0 is exactly what was

@@ -41,6 +41,16 @@ export function classifyDeterministic(run: RunRecord, stepKind: StepKindLookup):
   const errorText = (failedStep?.error ?? run.error ?? "").slice(0, 4000);
   const kind = failedStep ? stepKind(failedStep.index) : undefined;
 
+  // The step never resolved during authoring (codegen baked in a throw
+  // instead of a locator/assertion at all) -- this is a gap in the test
+  // itself, not evidence the app regressed, so it's neither real_bug nor
+  // ui_drift. Checked first since an unresolved assertion step would
+  // otherwise match the assertion-failure pattern below and get misfiled.
+  if (/Unresolved step:/.test(errorText)) {
+    evidence.push({ signal: "unresolved_step", detail: errorText.slice(0, 400) });
+    return { runId: run.id, classification: "unknown", confidence: 0.95, evidence };
+  }
+
   const hasNetworkSignal =
     run.networkErrors.some((e) => NETWORK_STATUS_PATTERNS.some((p) => p.test(e))) || NETWORK_ERRORTEXT_PATTERNS.some((p) => p.test(errorText));
   if (hasNetworkSignal) {

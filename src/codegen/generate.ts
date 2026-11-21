@@ -78,7 +78,7 @@ export function generateSpec(opts: { title: string; startUrl: string; steps: Res
 
   for (const step of opts.steps) {
     const inner: string[] = [];
-    if (!step.resolutionOk && step.kind === "action") {
+    if (!step.resolutionOk) {
       inner.push(`    throw new Error(${JSON.stringify(`Unresolved step: ${step.sentence} -- ${step.resolutionNote ?? ""}`)});`);
     } else {
       switch (step.action) {

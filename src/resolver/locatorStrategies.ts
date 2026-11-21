@@ -113,3 +113,22 @@ export function buildLocatorCandidates(description: string): Array<LocatorCandid
 
   return candidates;
 }
+
+/**
+ * A single "text" candidate for the exact, unmodified string -- used when
+ * falling back to an assertion's *expected* literal text (e.g. "expect the
+ * error message to show 'Sorry, this user has been locked out'"). Running
+ * that through extractQuotedOrCore's stopword-stripping (built for vague
+ * target descriptions like "the error message") would corrupt the real page
+ * text being searched for -- e.g. dropping "this" turns a real substring
+ * into one that no longer appears on the page at all.
+ */
+export function buildExactTextCandidate(text: string): LocatorCandidate & { locate: (page: Page | Locator) => Locator } {
+  return {
+    strategy: "text",
+    code: `getByText('${text.replace(/'/g, "\\'")}')`,
+    description: `text="${text}"`,
+    matchCount: -1,
+    locate: (p) => p.getByText(text, { exact: false }),
+  };
+}

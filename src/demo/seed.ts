@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createProject, loadProject } from "../storage/project.js";
 import { authorTest } from "../authoring/author.js";
+import { listTests } from "../storage/repo.js";
 import type { TestSource } from "../parser/index.js";
 import { ROOT_DIR } from "../config/env.js";
 import { SAUCEDEMO_TESTS } from "./saucedemoTests.js";
@@ -189,6 +190,22 @@ export const TODOMVC_TESTS: TestSource[] = [
   },
 ];
 
+async function authorIfNew(project: Parameters<typeof authorTest>[0]["project"], source: TestSource, opts: { destructiveApproved?: boolean } = {}): Promise<void> {
+  const existingTitles = new Set(listTests(project.id).map((t) => t.title));
+  if (existingTitles.has(source.title)) {
+    console.log(`Skipping (already seeded): ${source.title}`);
+    return;
+  }
+  console.log(`Authoring: ${source.title}`);
+  const report = await authorTest({ project, source, useAi: true, ...opts });
+  const failed = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
+  console.log(`  -> ${report.test.id} (${failed.length ? `${failed.length} step(s) need review` : "all steps resolved"})`);
+}
+
+/**
+ * Idempotent by test title: safe to run repeatedly (e.g. every `npm run
+ * eval`) without piling up duplicate seeded tests on each run.
+ */
 export async function seedDemoProjects(): Promise<void> {
   await ensureDemoAppRunning();
 
@@ -202,13 +219,7 @@ export async function seedDemoProjects(): Promise<void> {
     });
     console.log(`Created project "${project.id}".`);
   }
-
-  for (const source of BUGGYMART_TESTS) {
-    console.log(`Authoring: ${source.title}`);
-    const report = await authorTest({ project, source, useAi: true });
-    const failed = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
-    console.log(`  -> ${report.test.id} (${failed.length ? `${failed.length} step(s) need review` : "all steps resolved"})`);
-  }
+  for (const source of BUGGYMART_TESTS) await authorIfNew(project, source);
 
   let todomvc = loadProject("todomvc");
   if (!todomvc) {
@@ -220,13 +231,7 @@ export async function seedDemoProjects(): Promise<void> {
     });
     console.log(`Created project "${todomvc.id}".`);
   }
-
-  for (const source of TODOMVC_TESTS) {
-    console.log(`Authoring: ${source.title}`);
-    const report = await authorTest({ project: todomvc, source, useAi: true });
-    const failed = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
-    console.log(`  -> ${report.test.id} (${failed.length ? `${failed.length} step(s) need review` : "all steps resolved"})`);
-  }
+  for (const source of TODOMVC_TESTS) await authorIfNew(todomvc, source);
 
   let saucedemo = loadProject("saucedemo");
   if (!saucedemo) {
@@ -238,15 +243,9 @@ export async function seedDemoProjects(): Promise<void> {
     });
     console.log(`Created project "${saucedemo.id}".`);
   }
-
-  for (const source of SAUCEDEMO_TESTS) {
-    console.log(`Authoring: ${source.title}`);
-    // "checkout" trips the destructive-action guard; SauceDemo's checkout
-    // never charges anything real, so this seed corpus pre-approves it.
-    const report = await authorTest({ project: saucedemo, source, useAi: true, destructiveApproved: true });
-    const failed = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
-    console.log(`  -> ${report.test.id} (${failed.length ? `${failed.length} step(s) need review` : "all steps resolved"})`);
-  }
+  // "checkout" trips the destructive-action guard; SauceDemo's checkout
+  // never charges anything real, so this seed corpus pre-approves it.
+  for (const source of SAUCEDEMO_TESTS) await authorIfNew(saucedemo, source, { destructiveApproved: true });
 
   console.log("Seeding complete.");
 }

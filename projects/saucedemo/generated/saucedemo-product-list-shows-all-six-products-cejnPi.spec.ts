@@ -39,18 +39,17 @@ test('SauceDemo: product list shows all six products', async ({ page }, testInfo
   });
 
   await test.step("Step 6: expect \"Sauce Labs Bolt T-Shirt\" to be visible", async () => {
-    const assert6 = page.getByText("\"Sauce Labs Bolt T-Shirt\"");
-    await expect(assert6.first()).toBeVisible();
+    throw new Error("Unresolved step: expect \"Sauce Labs Bolt T-Shirt\" to be visible -- Could not find a unique, stable element for \"\"Sauce Labs Bolt T-Shirt\"\". Best guess: role=button name=\"Sauce Labs Bolt T-Shirt\" (confidence 0.14).");
   });
 
   await test.step("Step 7: expect \"Sauce Labs Fleece Jacket\" to be visible", async () => {
-    const assert7 = page.getByText('Sauce Labs Fleece Jacket');
-    await expect(assert7.first()).toBeVisible();
+    const assert6 = page.getByText('Sauce Labs Fleece Jacket');
+    await expect(assert6.first()).toBeVisible();
   });
 
   await test.step("Step 8: expect \"Sauce Labs Onesie\" to be visible", async () => {
-    const assert8 = page.getByText('Sauce Labs Onesie');
-    await expect(assert8.first()).toBeVisible();
+    const assert7 = page.getByText('Sauce Labs Onesie');
+    await expect(assert7.first()).toBeVisible();
   });
   } finally {
     await testInfo.attach('console-errors.json', { body: Buffer.from(JSON.stringify(consoleErrors)), contentType: 'application/json' });

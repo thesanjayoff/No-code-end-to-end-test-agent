@@ -222,10 +222,14 @@
     "warnings": [],
     "targetDescription": "the error message",
     "expected": "Sorry, this user has been locked out",
-    "resolutionOk": false,
-    "resolutionNote": "Could not find a unique, stable element for \"the error message\". Best guess: role=button name=\"error message\" (confidence 0.00).",
     "usedAi": false,
     "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('Sorry, this user has been locked out')",
+        "description": "text=\"Sorry, this user has been locked out\"",
+        "confidence": 0.6
+      },
       {
         "strategy": "role",
         "code": "getByRole('button', { name: 'error message' })",
@@ -257,45 +261,9 @@
         "confidence": 0
       },
       {
-        "strategy": "role",
-        "code": "getByRole('button', { name: 'Sorry, user has been locked out' })",
-        "description": "role=button name=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
-        "strategy": "role",
-        "code": "getByRole('link', { name: 'Sorry, user has been locked out' })",
-        "description": "role=link name=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
-        "strategy": "role",
-        "code": "getByRole('textbox', { name: 'Sorry, user has been locked out' })",
-        "description": "role=textbox name=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
-        "strategy": "role",
-        "code": "getByRole('checkbox', { name: 'Sorry, user has been locked out' })",
-        "description": "role=checkbox name=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
-        "strategy": "role",
-        "code": "getByRole('combobox', { name: 'Sorry, user has been locked out' })",
-        "description": "role=combobox name=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
         "strategy": "label",
         "code": "getByLabel('error message')",
         "description": "label=\"error message\"",
-        "confidence": 0
-      },
-      {
-        "strategy": "label",
-        "code": "getByLabel('Sorry, user has been locked out')",
-        "description": "label=\"Sorry, user has been locked out\"",
         "confidence": 0
       },
       {
@@ -305,21 +273,9 @@
         "confidence": 0
       },
       {
-        "strategy": "placeholder",
-        "code": "getByPlaceholder('Sorry, user has been locked out')",
-        "description": "placeholder=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
         "strategy": "testid",
         "code": "getByTestId('error-message')",
         "description": "data-testid=\"error-message\"",
-        "confidence": 0
-      },
-      {
-        "strategy": "testid",
-        "code": "getByTestId('sorry-user-has-been-locked-out')",
-        "description": "data-testid=\"sorry-user-has-been-locked-out\"",
         "confidence": 0
       },
       {
@@ -329,24 +285,19 @@
         "confidence": 0
       },
       {
-        "strategy": "text",
-        "code": "getByText('Sorry, user has been locked out')",
-        "description": "text=\"Sorry, user has been locked out\"",
-        "confidence": 0
-      },
-      {
         "strategy": "css",
         "code": "locator('#error-message')",
         "description": "css id=\"#error-message\"",
         "confidence": 0
-      },
-      {
-        "strategy": "css",
-        "code": "locator('#sorry-user-has-been-locked-out')",
-        "description": "css id=\"#sorry-user-has-been-locked-out\"",
-        "confidence": 0
       }
     ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('Sorry, this user has been locked out')",
+      "description": "text=\"Sorry, this user has been locked out\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
     "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-04.png"
   }
 ]

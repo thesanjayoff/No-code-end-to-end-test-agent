@@ -1,11 +1,12 @@
 import fs from "node:fs";
+import { fileURLToPath } from "node:url";
 import { createProject, loadProject } from "../src/storage/project.js";
-import { authorTest } from "../src/authoring/author.js";
 import { runTests } from "../src/runner/run.js";
 import { triageRun } from "../src/triage/run.js";
 import type { TriageClass } from "../src/types.js";
 import type { TestSource } from "../src/parser/index.js";
 import { ensureDemoAppRunning, DEMO_APP_URL } from "./seed.js";
+import { reauthor } from "./cleanup.js";
 
 /**
  * Triage confusion-matrix benchmark. Each case authors a test against
@@ -129,7 +130,7 @@ export async function runTriageBenchmark(): Promise<void> {
     // "checkout" trips the destructive-action guard (safety/destructive.ts)
     // for real -- this benchmark is read-only against our own local demo
     // app, so it's fine to pre-approve here.
-    const report = await authorTest({ project, source: c.source, useAi: false, destructiveApproved: true });
+    const report = await reauthor({ project, source: c.source, useAi: false, destructiveApproved: true });
     const unresolved = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
     if (unresolved.length) {
       results.push({ case: c, actual: "unresolved", pass: false });
@@ -159,7 +160,7 @@ export async function runTriageBenchmark(): Promise<void> {
   console.log(`\n${results.filter((r) => r.pass).length}/${results.length} matched ground truth.`);
 }
 
-if (process.argv[1] && new URL(import.meta.url).pathname.endsWith("triage-benchmark.ts")) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   runTriageBenchmark().catch((err) => {
     console.error(err);
     process.exit(1);

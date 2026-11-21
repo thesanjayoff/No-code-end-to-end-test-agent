@@ -9,6 +9,7 @@ import { assertHealIsAllowed } from "../src/healer/guard.js";
 import { upsertTest, listBugReports } from "../src/storage/repo.js";
 import type { ResolvedStep, TestDefinition } from "../src/types.js";
 import { ensureDemoAppRunning, DEMO_APP_URL } from "./seed.js";
+import { deleteTestsByTitle } from "./cleanup.js";
 
 /**
  * Healing correctness benchmark. Each case plants a "before" resolved
@@ -107,6 +108,7 @@ async function runCase(projectId: string, c: Case): Promise<{ case: Case; outcom
     return { case: c, outcome: pass ? "guard_refused" : "guard_allowed_WRONG", pass, detail: pass ? "" : (guard as any).reason ?? "" };
   }
 
+  deleteTestsByTitle(projectId, [c.name]);
   const testId = `bench-${nanoid(8)}`;
   const startUrl = `${DEMO_APP_URL}${c.path}?variant=${c.variant}`;
   const test: TestDefinition = {

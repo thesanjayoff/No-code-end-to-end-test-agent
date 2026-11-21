@@ -30,6 +30,7 @@
     "stepIndex": 4,
     "sentence": "expect the error message to show \"Sorry, this user has been locked out\"",
     "usedAi": false,
+    "locatorStrategy": "text",
     "stepTitle": "Step 4: expect the error message to show \"Sorry, this user has been locked out\""
   }
 ]

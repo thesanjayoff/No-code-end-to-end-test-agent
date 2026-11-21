@@ -1,8 +1,10 @@
+import { fileURLToPath } from "node:url";
 import { createProject, loadProject } from "../src/storage/project.js";
 import { authorTest } from "../src/authoring/author.js";
 import { runTests } from "../src/runner/run.js";
 import { runStabilityCheck } from "../src/flake/stability.js";
 import { ensureDemoAppRunning, DEMO_APP_URL } from "./seed.js";
+import { deleteTestsByTitle } from "./cleanup.js";
 
 /**
  * Stability-check evaluation. demo-app's /flaky route is genuinely
@@ -26,15 +28,22 @@ export async function runStabilityBenchmark(): Promise<void> {
     project = createProject({ name: "BuggyMart", allowedDomains: ["localhost"], environments: { local: { baseUrl: DEMO_APP_URL } }, defaultEnvironment: "local" });
   }
 
+  const title = "stability-bench: flaky badge";
+  deleteTestsByTitle(project.id, [title]);
+
   // Authoring itself hits the same 30% delayed-load chance as any other
   // visit to /flaky, so a single authoring attempt can legitimately fail
-  // to resolve -- retry a few times rather than treat that as a bug.
+  // to resolve -- retry a few times rather than treat that as a bug. Each
+  // retry reuses the same test id (existingTestId) so a failed attempt
+  // overwrites in place instead of leaving an orphaned row behind.
   let test;
+  let testId: string | undefined;
   for (let attempt = 1; attempt <= 5; attempt++) {
     const report = await authorTest({
       project,
+      existingTestId: testId,
       source: {
-        title: "stability-bench: flaky badge",
+        title,
         startUrl: "/flaky",
         environment: "local",
         tags: ["stability-benchmark"],
@@ -42,6 +51,7 @@ export async function runStabilityBenchmark(): Promise<void> {
       },
       useAi: false,
     });
+    testId = report.test.id;
     const unresolved = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
     if (!unresolved.length) {
       test = report.test;
@@ -73,7 +83,7 @@ export async function runStabilityBenchmark(): Promise<void> {
   console.log(`  stable: ${result.stable}`);
 }
 
-if (process.argv[1] && new URL(import.meta.url).pathname.endsWith("stability-benchmark.ts")) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   runStabilityBenchmark().catch((err) => {
     console.error(err);
     process.exit(1);
