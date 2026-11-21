@@ -1,0 +1,15 @@
+title: "SauceDemo: checkout requires a first name"
+startUrl: /
+environment: local
+tags:
+  - checkout
+  - forms
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - click the Checkout button
+  - click the Continue button
+  - expect the error message to show "First Name is required"

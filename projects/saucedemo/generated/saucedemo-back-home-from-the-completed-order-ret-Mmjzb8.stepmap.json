@@ -1,0 +1,99 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://www.saucedemo.com/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://www.saucedemo.com/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill Username with \"standard_user\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: fill Username with \"standard_user\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: fill Password with \"secret_sauce\""
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "click the Login button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: click the Login button"
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Backpack\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 4: click \"Add to cart\" for \"Sauce Labs Backpack\""
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "click \"Cart, 1 items\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 5: click \"Cart, 1 items\""
+  },
+  {
+    "stepIndex": 6,
+    "sentence": "click the Checkout button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 6: click the Checkout button"
+  },
+  {
+    "stepIndex": 7,
+    "sentence": "fill First Name with \"Jordan\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 7: fill First Name with \"Jordan\""
+  },
+  {
+    "stepIndex": 8,
+    "sentence": "fill Last Name with \"Lee\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 8: fill Last Name with \"Lee\""
+  },
+  {
+    "stepIndex": 9,
+    "sentence": "fill Zip/Postal Code with \"12345\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 9: fill Zip/Postal Code with \"12345\""
+  },
+  {
+    "stepIndex": 10,
+    "sentence": "click the Continue button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 10: click the Continue button"
+  },
+  {
+    "stepIndex": 11,
+    "sentence": "click the Finish button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 11: click the Finish button"
+  },
+  {
+    "stepIndex": 12,
+    "sentence": "click the Back Home button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 12: click the Back Home button"
+  },
+  {
+    "stepIndex": 13,
+    "sentence": "expect the Products heading to be visible",
+    "usedAi": false,
+    "locatorStrategy": "label",
+    "stepTitle": "Step 13: expect the Products heading to be visible"
+  }
+]

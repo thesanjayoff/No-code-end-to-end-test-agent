@@ -1,0 +1,13 @@
+title: "SauceDemo: removing an item from the cart clears the badge"
+startUrl: /
+environment: local
+tags:
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - click "Remove" for "Sauce Labs Backpack"
+  - expect "Cart, empty" to be visible

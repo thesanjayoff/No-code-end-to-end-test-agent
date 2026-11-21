@@ -1,0 +1,10 @@
+title: "SauceDemo: empty username is rejected"
+startUrl: /
+environment: local
+tags:
+  - auth
+  - forms
+steps:
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect the error message to show "Username is required"

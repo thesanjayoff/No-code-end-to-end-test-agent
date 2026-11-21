@@ -1,0 +1,28 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://todomvc.com/examples/react/dist/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://todomvc.com/examples/react/dist/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill \"What needs to be done?\" with \"Buy milk\"",
+    "usedAi": false,
+    "locatorStrategy": "placeholder",
+    "stepTitle": "Step 1: fill \"What needs to be done?\" with \"Buy milk\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "press Enter",
+    "usedAi": false,
+    "stepTitle": "Step 2: press Enter"
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "expect the Active link to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: expect the Active link to be visible"
+  }
+]

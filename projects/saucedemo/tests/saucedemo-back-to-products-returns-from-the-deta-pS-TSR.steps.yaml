@@ -1,0 +1,12 @@
+title: "SauceDemo: back to products returns from the detail page"
+startUrl: /
+environment: local
+tags:
+  - detail
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Sauce Labs Backpack"
+  - click the Back to products button
+  - expect the Products heading to be visible

@@ -1,0 +1,15 @@
+title: Adding several todos keeps them all visible under All
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill "What needs to be done?" with "Buy milk"
+  - press Enter
+  - fill "What needs to be done?" with "Walk the dog"
+  - press Enter
+  - fill "What needs to be done?" with "Water the plants"
+  - press Enter
+  - expect "Buy milk" to be visible
+  - expect "Walk the dog" to be visible
+  - expect "Water the plants" to be visible

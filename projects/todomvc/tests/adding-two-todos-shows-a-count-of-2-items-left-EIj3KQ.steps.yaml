@@ -1,0 +1,11 @@
+title: Adding two todos shows a count of 2 items left
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill "What needs to be done?" with "Buy milk"
+  - press Enter
+  - fill "What needs to be done?" with "Walk the dog"
+  - press Enter
+  - expect "2 items left" to be visible

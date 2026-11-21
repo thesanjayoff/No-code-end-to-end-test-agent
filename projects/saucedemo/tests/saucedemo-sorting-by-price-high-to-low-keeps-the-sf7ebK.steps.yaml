@@ -1,0 +1,11 @@
+title: "SauceDemo: sorting by price high to low keeps the Fleece Jacket visible"
+startUrl: /
+environment: local
+tags:
+  - sort
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - select "Price (high to low)" from the sort dropdown
+  - expect "Sauce Labs Fleece Jacket" to be visible

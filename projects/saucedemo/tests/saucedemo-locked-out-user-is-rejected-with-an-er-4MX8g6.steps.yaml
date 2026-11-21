@@ -1,0 +1,10 @@
+title: "SauceDemo: locked-out user is rejected with an error"
+startUrl: /
+environment: local
+tags:
+  - auth
+steps:
+  - fill Username with "locked_out_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect the error message to show "Sorry, this user has been locked out"

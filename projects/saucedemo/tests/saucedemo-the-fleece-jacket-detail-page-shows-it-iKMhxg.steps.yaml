@@ -1,0 +1,11 @@
+title: "SauceDemo: the Fleece Jacket detail page shows its price"
+startUrl: /
+environment: local
+tags:
+  - detail
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Sauce Labs Fleece Jacket"
+  - expect "$49.99" to be visible

@@ -1,0 +1,17 @@
+title: "SauceDemo: checkout requires a postal code"
+startUrl: /
+environment: local
+tags:
+  - checkout
+  - forms
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - click the Checkout button
+  - fill First Name with "Jordan"
+  - fill Last Name with "Lee"
+  - click the Continue button
+  - expect the error message to show "Postal Code is required"

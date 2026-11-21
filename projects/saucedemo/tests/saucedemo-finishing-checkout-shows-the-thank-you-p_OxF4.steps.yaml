@@ -1,0 +1,19 @@
+title: "SauceDemo: finishing checkout shows the thank-you page"
+startUrl: /
+environment: local
+tags:
+  - smoke
+  - checkout
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - click the Checkout button
+  - fill First Name with "Jordan"
+  - fill Last Name with "Lee"
+  - fill Zip/Postal Code with "12345"
+  - click the Continue button
+  - click the Finish button
+  - expect "Thank you for your order" to be visible

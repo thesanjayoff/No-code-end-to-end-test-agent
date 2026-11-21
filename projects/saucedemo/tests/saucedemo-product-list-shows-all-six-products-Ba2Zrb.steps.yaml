@@ -1,0 +1,14 @@
+title: "SauceDemo: product list shows all six products"
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect "Sauce Labs Backpack" to be visible
+  - expect "Sauce Labs Bike Light" to be visible
+  - expect "Sauce Labs Bolt T-Shirt" to be visible
+  - expect "Sauce Labs Fleece Jacket" to be visible
+  - expect "Sauce Labs Onesie" to be visible

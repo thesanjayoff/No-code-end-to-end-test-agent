@@ -1,0 +1,14 @@
+title: "SauceDemo: resetting app state empties the cart"
+startUrl: /
+environment: local
+tags:
+  - nav
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click the Open Menu button
+  - click the Reset App State link
+  - expect "Cart, empty" to be visible

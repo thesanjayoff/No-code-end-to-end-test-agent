@@ -1,0 +1,11 @@
+title: "SauceDemo: standard login succeeds"
+startUrl: /
+environment: local
+tags:
+  - smoke
+  - auth
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect the Products heading to be visible

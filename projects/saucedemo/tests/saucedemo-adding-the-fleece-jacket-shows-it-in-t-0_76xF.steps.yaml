@@ -1,0 +1,12 @@
+title: "SauceDemo: adding the Fleece Jacket shows it in the cart"
+startUrl: /
+environment: local
+tags:
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Fleece Jacket"
+  - click "Cart, 1 items"
+  - expect "Sauce Labs Fleece Jacket" to be visible

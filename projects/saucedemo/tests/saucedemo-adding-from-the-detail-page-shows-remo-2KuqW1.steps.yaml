@@ -1,0 +1,13 @@
+title: "SauceDemo: adding from the detail page shows Remove instead of Add to cart"
+startUrl: /
+environment: local
+tags:
+  - detail
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Sauce Labs Backpack"
+  - click the Add to cart button
+  - expect the Remove button to be visible

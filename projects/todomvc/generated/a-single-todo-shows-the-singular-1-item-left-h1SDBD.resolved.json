@@ -1,0 +1,172 @@
+[
+  {
+    "index": 1,
+    "sentence": "fill \"What needs to be done?\" with \"Buy milk\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "What needs to be done?",
+    "data": "Buy milk",
+    "locator": {
+      "strategy": "placeholder",
+      "code": "getByPlaceholder('What needs to be done?')",
+      "description": "placeholder=\"What needs to be done?\"",
+      "confidence": 0.88
+    },
+    "candidates": [
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('What needs to be done?')",
+        "description": "placeholder=\"What needs to be done?\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'What needs to be done?' })",
+        "description": "role=button name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'What needs to be done?' })",
+        "description": "role=link name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'What needs to be done?' })",
+        "description": "role=textbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'What needs to be done?' })",
+        "description": "role=checkbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'What needs to be done?' })",
+        "description": "role=combobox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('What needs to be done?')",
+        "description": "label=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('what-needs-to-be-done')",
+        "description": "data-testid=\"what-needs-to-be-done\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('What needs to be done?')",
+        "description": "text=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#what-needs-to-be-done')",
+        "description": "css id=\"#what-needs-to-be-done\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-01.png",
+    "usedAi": false
+  },
+  {
+    "index": 2,
+    "sentence": "press Enter",
+    "kind": "action",
+    "action": "press",
+    "warnings": [],
+    "data": "Enter",
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-02.png",
+    "usedAi": false
+  },
+  {
+    "index": 3,
+    "sentence": "expect \"1 item left\" to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "\"1 item left\"",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('1 item left')",
+        "description": "text=\"1 item left\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: '1 item left' })",
+        "description": "role=button name=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: '1 item left' })",
+        "description": "role=link name=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: '1 item left' })",
+        "description": "role=textbox name=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: '1 item left' })",
+        "description": "role=checkbox name=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: '1 item left' })",
+        "description": "role=combobox name=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('1 item left')",
+        "description": "label=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('1 item left')",
+        "description": "placeholder=\"1 item left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('1-item-left')",
+        "description": "data-testid=\"1-item-left\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#1-item-left')",
+        "description": "css id=\"#1-item-left\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('1 item left')",
+      "description": "text=\"1 item left\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-03.png"
+  }
+]

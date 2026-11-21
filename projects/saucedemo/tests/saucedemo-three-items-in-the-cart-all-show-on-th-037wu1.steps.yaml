@@ -1,0 +1,16 @@
+title: "SauceDemo: three items in the cart all show on the cart page"
+startUrl: /
+environment: local
+tags:
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Add to cart" for "Sauce Labs Bike Light"
+  - click "Add to cart" for "Sauce Labs Onesie"
+  - click "Cart, 3 items"
+  - expect "Sauce Labs Backpack" to be visible
+  - expect "Sauce Labs Bike Light" to be visible
+  - expect "Sauce Labs Onesie" to be visible

@@ -1,0 +1,512 @@
+[
+  {
+    "index": 1,
+    "sentence": "fill \"What needs to be done?\" with \"Buy milk\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "What needs to be done?",
+    "data": "Buy milk",
+    "locator": {
+      "strategy": "placeholder",
+      "code": "getByPlaceholder('What needs to be done?')",
+      "description": "placeholder=\"What needs to be done?\"",
+      "confidence": 0.88
+    },
+    "candidates": [
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('What needs to be done?')",
+        "description": "placeholder=\"What needs to be done?\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'What needs to be done?' })",
+        "description": "role=button name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'What needs to be done?' })",
+        "description": "role=link name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'What needs to be done?' })",
+        "description": "role=textbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'What needs to be done?' })",
+        "description": "role=checkbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'What needs to be done?' })",
+        "description": "role=combobox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('What needs to be done?')",
+        "description": "label=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('what-needs-to-be-done')",
+        "description": "data-testid=\"what-needs-to-be-done\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('What needs to be done?')",
+        "description": "text=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#what-needs-to-be-done')",
+        "description": "css id=\"#what-needs-to-be-done\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-01.png",
+    "usedAi": false
+  },
+  {
+    "index": 2,
+    "sentence": "press Enter",
+    "kind": "action",
+    "action": "press",
+    "warnings": [],
+    "data": "Enter",
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-02.png",
+    "usedAi": false
+  },
+  {
+    "index": 3,
+    "sentence": "fill \"What needs to be done?\" with \"Walk the dog\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "What needs to be done?",
+    "data": "Walk the dog",
+    "locator": {
+      "strategy": "placeholder",
+      "code": "getByPlaceholder('What needs to be done?')",
+      "description": "placeholder=\"What needs to be done?\"",
+      "confidence": 0.88
+    },
+    "candidates": [
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('What needs to be done?')",
+        "description": "placeholder=\"What needs to be done?\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'What needs to be done?' })",
+        "description": "role=button name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'What needs to be done?' })",
+        "description": "role=link name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'What needs to be done?' })",
+        "description": "role=textbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'What needs to be done?' })",
+        "description": "role=checkbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'What needs to be done?' })",
+        "description": "role=combobox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('What needs to be done?')",
+        "description": "label=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('what-needs-to-be-done')",
+        "description": "data-testid=\"what-needs-to-be-done\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('What needs to be done?')",
+        "description": "text=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#what-needs-to-be-done')",
+        "description": "css id=\"#what-needs-to-be-done\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-03.png",
+    "usedAi": false
+  },
+  {
+    "index": 4,
+    "sentence": "press Enter",
+    "kind": "action",
+    "action": "press",
+    "warnings": [],
+    "data": "Enter",
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-04.png",
+    "usedAi": false
+  },
+  {
+    "index": 5,
+    "sentence": "fill \"What needs to be done?\" with \"Water the plants\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "What needs to be done?",
+    "data": "Water the plants",
+    "locator": {
+      "strategy": "placeholder",
+      "code": "getByPlaceholder('What needs to be done?')",
+      "description": "placeholder=\"What needs to be done?\"",
+      "confidence": 0.88
+    },
+    "candidates": [
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('What needs to be done?')",
+        "description": "placeholder=\"What needs to be done?\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'What needs to be done?' })",
+        "description": "role=button name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'What needs to be done?' })",
+        "description": "role=link name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'What needs to be done?' })",
+        "description": "role=textbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'What needs to be done?' })",
+        "description": "role=checkbox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'What needs to be done?' })",
+        "description": "role=combobox name=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('What needs to be done?')",
+        "description": "label=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('what-needs-to-be-done')",
+        "description": "data-testid=\"what-needs-to-be-done\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('What needs to be done?')",
+        "description": "text=\"What needs to be done?\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#what-needs-to-be-done')",
+        "description": "css id=\"#what-needs-to-be-done\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-05.png",
+    "usedAi": false
+  },
+  {
+    "index": 6,
+    "sentence": "press Enter",
+    "kind": "action",
+    "action": "press",
+    "warnings": [],
+    "data": "Enter",
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-06.png",
+    "usedAi": false
+  },
+  {
+    "index": 7,
+    "sentence": "expect \"Buy milk\" to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "\"Buy milk\"",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('Buy milk')",
+        "description": "text=\"Buy milk\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Buy milk' })",
+        "description": "role=button name=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Buy milk' })",
+        "description": "role=link name=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Buy milk' })",
+        "description": "role=textbox name=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Buy milk' })",
+        "description": "role=checkbox name=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Buy milk' })",
+        "description": "role=combobox name=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Buy milk')",
+        "description": "label=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Buy milk')",
+        "description": "placeholder=\"Buy milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('buy-milk')",
+        "description": "data-testid=\"buy-milk\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#buy-milk')",
+        "description": "css id=\"#buy-milk\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('Buy milk')",
+      "description": "text=\"Buy milk\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-07.png"
+  },
+  {
+    "index": 8,
+    "sentence": "expect \"Walk the dog\" to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "\"Walk the dog\"",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('Walk the dog')",
+        "description": "text=\"Walk the dog\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Walk the dog' })",
+        "description": "role=button name=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Walk the dog' })",
+        "description": "role=link name=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Walk the dog' })",
+        "description": "role=textbox name=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Walk the dog' })",
+        "description": "role=checkbox name=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Walk the dog' })",
+        "description": "role=combobox name=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Walk the dog')",
+        "description": "label=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Walk the dog')",
+        "description": "placeholder=\"Walk the dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('walk-the-dog')",
+        "description": "data-testid=\"walk-the-dog\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#walk-the-dog')",
+        "description": "css id=\"#walk-the-dog\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('Walk the dog')",
+      "description": "text=\"Walk the dog\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-08.png"
+  },
+  {
+    "index": 9,
+    "sentence": "expect \"Water the plants\" to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "\"Water the plants\"",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('Water the plants')",
+        "description": "text=\"Water the plants\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Water the plants' })",
+        "description": "role=button name=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Water the plants' })",
+        "description": "role=link name=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Water the plants' })",
+        "description": "role=textbox name=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Water the plants' })",
+        "description": "role=checkbox name=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Water the plants' })",
+        "description": "role=combobox name=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Water the plants')",
+        "description": "label=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Water the plants')",
+        "description": "placeholder=\"Water the plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('water-the-plants')",
+        "description": "data-testid=\"water-the-plants\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#water-the-plants')",
+        "description": "css id=\"#water-the-plants\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('Water the plants')",
+      "description": "text=\"Water the plants\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\todomvc\\runs\\authoring\\screenshots\\step-09.png"
+  }
+]

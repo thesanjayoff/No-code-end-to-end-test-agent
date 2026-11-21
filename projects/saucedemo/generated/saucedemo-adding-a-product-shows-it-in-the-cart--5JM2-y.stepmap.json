@@ -1,0 +1,43 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://www.saucedemo.com/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://www.saucedemo.com/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill Username with \"standard_user\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: fill Username with \"standard_user\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: fill Password with \"secret_sauce\""
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "click the Login button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: click the Login button"
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Backpack\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 4: click \"Add to cart\" for \"Sauce Labs Backpack\""
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "expect \"Cart, 1 items\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 5: expect \"Cart, 1 items\" to be visible"
+  }
+]

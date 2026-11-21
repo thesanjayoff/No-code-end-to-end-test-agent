@@ -1,0 +1,10 @@
+title: "SauceDemo: performance_glitch_user can still log in"
+startUrl: /
+environment: local
+tags:
+  - auth
+steps:
+  - fill Username with "performance_glitch_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect the Products heading to be visible

@@ -1,0 +1,12 @@
+title: "SauceDemo: clicking a product name opens its detail page"
+startUrl: /
+environment: local
+tags:
+  - detail
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Sauce Labs Backpack"
+  - expect "Sauce Labs Backpack" to be visible
+  - expect the Add to cart button to be visible

@@ -1,0 +1,9 @@
+title: The All filter link is visible once a todo exists
+startUrl: /
+environment: local
+tags:
+  - filters
+steps:
+  - fill "What needs to be done?" with "Buy milk"
+  - press Enter
+  - expect the All link to be visible

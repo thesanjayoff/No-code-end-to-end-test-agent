@@ -1,0 +1,376 @@
+[
+  {
+    "index": 1,
+    "sentence": "fill Username with \"standard_user\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "Username",
+    "data": "standard_user",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('textbox', { name: 'Username' })",
+      "description": "role=textbox name=\"Username\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Username' })",
+        "description": "role=textbox name=\"Username\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Username')",
+        "description": "label=\"Username\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Username')",
+        "description": "placeholder=\"Username\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Username')",
+        "description": "text=\"Username\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Username' })",
+        "description": "role=button name=\"Username\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Username' })",
+        "description": "role=link name=\"Username\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Username' })",
+        "description": "role=checkbox name=\"Username\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Username' })",
+        "description": "role=combobox name=\"Username\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('username')",
+        "description": "data-testid=\"username\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#username')",
+        "description": "css id=\"#username\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-01.png",
+    "usedAi": false
+  },
+  {
+    "index": 2,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "Password",
+    "data": "secret_sauce",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('textbox', { name: 'Password' })",
+      "description": "role=textbox name=\"Password\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Password' })",
+        "description": "role=textbox name=\"Password\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Password')",
+        "description": "label=\"Password\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Password')",
+        "description": "placeholder=\"Password\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Password')",
+        "description": "text=\"Password\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#password')",
+        "description": "css id=\"#password\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Password' })",
+        "description": "role=button name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Password' })",
+        "description": "role=link name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Password' })",
+        "description": "role=checkbox name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Password' })",
+        "description": "role=combobox name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('password')",
+        "description": "data-testid=\"password\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-02.png",
+    "usedAi": false
+  },
+  {
+    "index": 3,
+    "sentence": "click the Login button",
+    "kind": "action",
+    "action": "click",
+    "warnings": [],
+    "targetDescription": "the Login button",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('button', { name: 'Login' })",
+      "description": "role=button name=\"Login\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Login' })",
+        "description": "role=button name=\"Login\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Login')",
+        "description": "label=\"Login\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Login')",
+        "description": "text=\"Login\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Login')",
+        "description": "placeholder=\"Login\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('login')",
+        "description": "data-testid=\"login\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#login')",
+        "description": "css id=\"#login\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-03.png",
+    "usedAi": false
+  },
+  {
+    "index": 4,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Backpack\"",
+    "kind": "action",
+    "action": "click",
+    "warnings": [],
+    "targetDescription": "Add to cart",
+    "contextDescription": "Sauce Labs Backpack",
+    "locator": {
+      "strategy": "role",
+      "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByRole('button', { name: 'Add to cart' })",
+      "description": "role=button name=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByRole('button', { name: 'Add to cart' })",
+        "description": "role=button name=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "text",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByText('Add to cart')",
+        "description": "text=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByRole('link', { name: 'Add to cart' })",
+        "description": "role=link name=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByRole('textbox', { name: 'Add to cart' })",
+        "description": "role=textbox name=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByRole('checkbox', { name: 'Add to cart' })",
+        "description": "role=checkbox name=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByRole('combobox', { name: 'Add to cart' })",
+        "description": "role=combobox name=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByLabel('Add to cart')",
+        "description": "label=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByPlaceholder('Add to cart')",
+        "description": "placeholder=\"Add to cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).getByTestId('add-to-cart')",
+        "description": "data-testid=\"add-to-cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Sauce Labs Backpack\" }).locator('#add-to-cart')",
+        "description": "css id=\"#add-to-cart\" within an item containing \"Sauce Labs Backpack\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-04.png",
+    "usedAi": false
+  },
+  {
+    "index": 5,
+    "sentence": "expect \"Cart, 1 items\" to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "\"Cart, 1 items\"",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Cart, 1 items' })",
+        "description": "role=button name=\"Cart, 1 items\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Cart, 1 items')",
+        "description": "label=\"Cart, 1 items\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Cart, 1 items' })",
+        "description": "role=link name=\"Cart, 1 items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Cart, 1 items' })",
+        "description": "role=textbox name=\"Cart, 1 items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Cart, 1 items' })",
+        "description": "role=checkbox name=\"Cart, 1 items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Cart, 1 items' })",
+        "description": "role=combobox name=\"Cart, 1 items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Cart, 1 items')",
+        "description": "placeholder=\"Cart, 1 items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('cart-1-items')",
+        "description": "data-testid=\"cart-1-items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Cart, 1 items')",
+        "description": "text=\"Cart, 1 items\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#cart-1-items')",
+        "description": "css id=\"#cart-1-items\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('button', { name: 'Cart, 1 items' })",
+      "description": "role=button name=\"Cart, 1 items\"",
+      "confidence": 0.95
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-05.png"
+  }
+]

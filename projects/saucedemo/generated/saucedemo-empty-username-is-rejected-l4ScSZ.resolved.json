@@ -1,0 +1,277 @@
+[
+  {
+    "index": 1,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "Password",
+    "data": "secret_sauce",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('textbox', { name: 'Password' })",
+      "description": "role=textbox name=\"Password\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Password' })",
+        "description": "role=textbox name=\"Password\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Password')",
+        "description": "label=\"Password\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Password')",
+        "description": "placeholder=\"Password\"",
+        "confidence": 0.88
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Password')",
+        "description": "text=\"Password\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#password')",
+        "description": "css id=\"#password\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Password' })",
+        "description": "role=button name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Password' })",
+        "description": "role=link name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Password' })",
+        "description": "role=checkbox name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Password' })",
+        "description": "role=combobox name=\"Password\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('password')",
+        "description": "data-testid=\"password\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-01.png",
+    "usedAi": false
+  },
+  {
+    "index": 2,
+    "sentence": "click the Login button",
+    "kind": "action",
+    "action": "click",
+    "warnings": [],
+    "targetDescription": "the Login button",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('button', { name: 'Login' })",
+      "description": "role=button name=\"Login\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Login' })",
+        "description": "role=button name=\"Login\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Login')",
+        "description": "label=\"Login\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Login')",
+        "description": "text=\"Login\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Login')",
+        "description": "placeholder=\"Login\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('login')",
+        "description": "data-testid=\"login\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#login')",
+        "description": "css id=\"#login\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-02.png",
+    "usedAi": false
+  },
+  {
+    "index": 3,
+    "sentence": "expect the error message to show \"Username is required\"",
+    "kind": "assertion",
+    "action": "expect_text",
+    "warnings": [],
+    "targetDescription": "the error message",
+    "expected": "Username is required",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('Username is required')",
+        "description": "text=\"Username is required\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'error message' })",
+        "description": "role=button name=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'error message' })",
+        "description": "role=link name=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'error message' })",
+        "description": "role=textbox name=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'error message' })",
+        "description": "role=checkbox name=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'error message' })",
+        "description": "role=combobox name=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Username is required' })",
+        "description": "role=button name=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Username is required' })",
+        "description": "role=link name=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Username is required' })",
+        "description": "role=textbox name=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Username is required' })",
+        "description": "role=checkbox name=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Username is required' })",
+        "description": "role=combobox name=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('error message')",
+        "description": "label=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Username is required')",
+        "description": "label=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('error message')",
+        "description": "placeholder=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Username is required')",
+        "description": "placeholder=\"Username is required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('error-message')",
+        "description": "data-testid=\"error-message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('username-is-required')",
+        "description": "data-testid=\"username-is-required\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('error message')",
+        "description": "text=\"error message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#error-message')",
+        "description": "css id=\"#error-message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#username-is-required')",
+        "description": "css id=\"#username-is-required\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('Username is required')",
+      "description": "text=\"Username is required\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\saucedemo\\runs\\authoring\\screenshots\\step-03.png"
+  }
+]

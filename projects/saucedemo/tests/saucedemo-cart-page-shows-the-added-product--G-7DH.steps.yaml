@@ -1,0 +1,13 @@
+title: "SauceDemo: cart page shows the added product"
+startUrl: /
+environment: local
+tags:
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - expect "Sauce Labs Backpack" to be visible
+  - expect the Checkout button to be visible

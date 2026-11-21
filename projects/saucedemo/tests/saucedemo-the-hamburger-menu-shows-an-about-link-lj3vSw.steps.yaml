@@ -1,0 +1,11 @@
+title: "SauceDemo: the hamburger menu shows an About link"
+startUrl: /
+environment: local
+tags:
+  - nav
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click the Open Menu button
+  - expect the About link to be visible

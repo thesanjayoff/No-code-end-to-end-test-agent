@@ -1,0 +1,11 @@
+title: "SauceDemo: sorting by price low to high reorders products"
+startUrl: /
+environment: local
+tags:
+  - sort
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - select "Price (low to high)" from the sort dropdown
+  - expect "Sauce Labs Onesie" to be visible

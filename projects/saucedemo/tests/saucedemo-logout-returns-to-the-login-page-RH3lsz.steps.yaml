@@ -1,0 +1,14 @@
+title: "SauceDemo: logout returns to the login page"
+startUrl: /
+environment: local
+tags:
+  - smoke
+  - auth
+  - nav
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click the Open Menu button
+  - click the Logout link
+  - expect the Login button to be visible

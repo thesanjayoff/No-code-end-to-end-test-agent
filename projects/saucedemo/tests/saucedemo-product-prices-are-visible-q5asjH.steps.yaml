@@ -1,0 +1,11 @@
+title: "SauceDemo: product prices are visible"
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect "$29.99" to be visible
+  - expect "$9.99" to be visible

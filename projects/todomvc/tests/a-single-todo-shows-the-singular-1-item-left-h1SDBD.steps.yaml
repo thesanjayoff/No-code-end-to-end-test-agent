@@ -1,0 +1,9 @@
+title: A single todo shows the singular '1 item left'
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill "What needs to be done?" with "Buy milk"
+  - press Enter
+  - expect "1 item left" to be visible

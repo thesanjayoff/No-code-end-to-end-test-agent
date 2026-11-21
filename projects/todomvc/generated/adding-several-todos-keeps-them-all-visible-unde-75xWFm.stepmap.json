@@ -1,0 +1,68 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://todomvc.com/examples/react/dist/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://todomvc.com/examples/react/dist/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill \"What needs to be done?\" with \"Buy milk\"",
+    "usedAi": false,
+    "locatorStrategy": "placeholder",
+    "stepTitle": "Step 1: fill \"What needs to be done?\" with \"Buy milk\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "press Enter",
+    "usedAi": false,
+    "stepTitle": "Step 2: press Enter"
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "fill \"What needs to be done?\" with \"Walk the dog\"",
+    "usedAi": false,
+    "locatorStrategy": "placeholder",
+    "stepTitle": "Step 3: fill \"What needs to be done?\" with \"Walk the dog\""
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "press Enter",
+    "usedAi": false,
+    "stepTitle": "Step 4: press Enter"
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "fill \"What needs to be done?\" with \"Water the plants\"",
+    "usedAi": false,
+    "locatorStrategy": "placeholder",
+    "stepTitle": "Step 5: fill \"What needs to be done?\" with \"Water the plants\""
+  },
+  {
+    "stepIndex": 6,
+    "sentence": "press Enter",
+    "usedAi": false,
+    "stepTitle": "Step 6: press Enter"
+  },
+  {
+    "stepIndex": 7,
+    "sentence": "expect \"Buy milk\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 7: expect \"Buy milk\" to be visible"
+  },
+  {
+    "stepIndex": 8,
+    "sentence": "expect \"Walk the dog\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 8: expect \"Walk the dog\" to be visible"
+  },
+  {
+    "stepIndex": 9,
+    "sentence": "expect \"Water the plants\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 9: expect \"Water the plants\" to be visible"
+  }
+]

@@ -4,6 +4,7 @@ import { createProject, loadProject } from "../storage/project.js";
 import { authorTest } from "../authoring/author.js";
 import type { TestSource } from "../parser/index.js";
 import { ROOT_DIR } from "../config/env.js";
+import { SAUCEDEMO_TESTS } from "./saucedemoTests.js";
 
 export const DEMO_APP_PORT = Number(process.env.DEMO_APP_PORT ?? 4799);
 export const DEMO_APP_URL = `http://localhost:${DEMO_APP_PORT}`;
@@ -101,6 +102,93 @@ export const BUGGYMART_TESTS: TestSource[] = [
   },
 ];
 
+export const TODOMVC_TESTS: TestSource[] = [
+  {
+    title: "Adding a todo shows it in the list",
+    startUrl: "/",
+    environment: "local",
+    tags: ["smoke"],
+    steps: ['fill "What needs to be done?" with "Buy milk"', "press Enter", 'expect "Buy milk" to be visible'],
+  },
+  {
+    title: "Completing a todo marks it done",
+    startUrl: "/",
+    environment: "local",
+    tags: ["smoke"],
+    // "check" by name doesn't resolve here -- TodoMVC's checkbox has no
+    // accessible name of its own (the label isn't associated with it via
+    // for/aria-labelledby), so this intentionally needs-review step is
+    // kept as a documented authoring limitation rather than reworded to
+    // force a pass.
+    steps: ['fill "What needs to be done?" with "Walk the dog"', "press Enter", 'check "Walk the dog"', 'expect "Walk the dog" to be visible'],
+  },
+  {
+    title: "Adding two todos shows a count of 2 items left",
+    startUrl: "/",
+    environment: "local",
+    tags: ["smoke"],
+    steps: [
+      'fill "What needs to be done?" with "Buy milk"',
+      "press Enter",
+      'fill "What needs to be done?" with "Walk the dog"',
+      "press Enter",
+      'expect "2 items left" to be visible',
+    ],
+  },
+  {
+    title: "A single todo shows the singular '1 item left'",
+    startUrl: "/",
+    environment: "local",
+    tags: ["smoke"],
+    steps: ['fill "What needs to be done?" with "Buy milk"', "press Enter", 'expect "1 item left" to be visible'],
+  },
+  {
+    title: "The Active filter link is visible once a todo exists",
+    startUrl: "/",
+    environment: "local",
+    tags: ["filters"],
+    steps: ['fill "What needs to be done?" with "Buy milk"', "press Enter", "expect the Active link to be visible"],
+  },
+  {
+    title: "The All filter link is visible once a todo exists",
+    startUrl: "/",
+    environment: "local",
+    tags: ["filters"],
+    steps: ['fill "What needs to be done?" with "Buy milk"', "press Enter", "expect the All link to be visible"],
+  },
+  {
+    title: "The Completed filter link is visible once a todo exists",
+    startUrl: "/",
+    environment: "local",
+    tags: ["filters"],
+    steps: ['fill "What needs to be done?" with "Buy milk"', "press Enter", "expect the Completed link to be visible"],
+  },
+  {
+    title: "Adding several todos keeps them all visible under All",
+    startUrl: "/",
+    environment: "local",
+    tags: ["smoke"],
+    steps: [
+      'fill "What needs to be done?" with "Buy milk"',
+      "press Enter",
+      'fill "What needs to be done?" with "Walk the dog"',
+      "press Enter",
+      'fill "What needs to be done?" with "Water the plants"',
+      "press Enter",
+      'expect "Buy milk" to be visible',
+      'expect "Walk the dog" to be visible',
+      'expect "Water the plants" to be visible',
+    ],
+  },
+  {
+    title: "The input placeholder prompts for a new todo",
+    startUrl: "/",
+    environment: "local",
+    tags: ["smoke"],
+    steps: ['expect "What needs to be done?" to be visible'],
+  },
+];
+
 export async function seedDemoProjects(): Promise<void> {
   await ensureDemoAppRunning();
 
@@ -133,25 +221,29 @@ export async function seedDemoProjects(): Promise<void> {
     console.log(`Created project "${todomvc.id}".`);
   }
 
-  const todoTests: TestSource[] = [
-    {
-      title: "Adding a todo shows it in the list",
-      startUrl: "/",
-      environment: "local",
-      tags: ["smoke"],
-      steps: ['fill "What needs to be done?" with "Buy milk"', "press Enter", 'expect "Buy milk" to be visible'],
-    },
-    {
-      title: "Completing a todo marks it done",
-      startUrl: "/",
-      environment: "local",
-      tags: ["smoke"],
-      steps: ['fill "What needs to be done?" with "Walk the dog"', "press Enter", 'check "Walk the dog"', 'expect "Walk the dog" to be visible'],
-    },
-  ];
-  for (const source of todoTests) {
+  for (const source of TODOMVC_TESTS) {
     console.log(`Authoring: ${source.title}`);
     const report = await authorTest({ project: todomvc, source, useAi: true });
+    const failed = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
+    console.log(`  -> ${report.test.id} (${failed.length ? `${failed.length} step(s) need review` : "all steps resolved"})`);
+  }
+
+  let saucedemo = loadProject("saucedemo");
+  if (!saucedemo) {
+    saucedemo = createProject({
+      name: "SauceDemo",
+      allowedDomains: ["saucedemo.com"],
+      environments: { local: { baseUrl: "https://www.saucedemo.com" } },
+      defaultEnvironment: "local",
+    });
+    console.log(`Created project "${saucedemo.id}".`);
+  }
+
+  for (const source of SAUCEDEMO_TESTS) {
+    console.log(`Authoring: ${source.title}`);
+    // "checkout" trips the destructive-action guard; SauceDemo's checkout
+    // never charges anything real, so this seed corpus pre-approves it.
+    const report = await authorTest({ project: saucedemo, source, useAi: true, destructiveApproved: true });
     const failed = report.resolution.resolvedSteps.filter((s) => !s.resolutionOk);
     console.log(`  -> ${report.test.id} (${failed.length ? `${failed.length} step(s) need review` : "all steps resolved"})`);
   }

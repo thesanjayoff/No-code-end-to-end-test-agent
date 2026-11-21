@@ -1,0 +1,15 @@
+{
+  "id": "saucedemo",
+  "name": "SauceDemo",
+  "allowedDomains": [
+    "saucedemo.com"
+  ],
+  "environments": {
+    "local": {
+      "baseUrl": "https://www.saucedemo.com"
+    }
+  },
+  "defaultEnvironment": "local",
+  "productionDomains": [],
+  "createdAt": "2026-11-21T17:01:35.859Z"
+}

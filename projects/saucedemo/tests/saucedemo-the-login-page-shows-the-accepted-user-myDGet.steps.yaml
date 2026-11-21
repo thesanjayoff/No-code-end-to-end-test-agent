@@ -1,0 +1,7 @@
+title: "SauceDemo: the login page shows the accepted usernames hint"
+startUrl: /
+environment: local
+tags:
+  - auth
+steps:
+  - expect "Accepted usernames are" to be visible

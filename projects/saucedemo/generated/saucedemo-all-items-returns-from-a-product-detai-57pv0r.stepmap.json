@@ -1,0 +1,57 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://www.saucedemo.com/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://www.saucedemo.com/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill Username with \"standard_user\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: fill Username with \"standard_user\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: fill Password with \"secret_sauce\""
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "click the Login button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: click the Login button"
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "click \"Sauce Labs Bike Light\"",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 4: click \"Sauce Labs Bike Light\""
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "click the Open Menu button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 5: click the Open Menu button"
+  },
+  {
+    "stepIndex": 6,
+    "sentence": "click the All Items link",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 6: click the All Items link"
+  },
+  {
+    "stepIndex": 7,
+    "sentence": "expect the Products heading to be visible",
+    "usedAi": false,
+    "locatorStrategy": "label",
+    "stepTitle": "Step 7: expect the Products heading to be visible"
+  }
+]

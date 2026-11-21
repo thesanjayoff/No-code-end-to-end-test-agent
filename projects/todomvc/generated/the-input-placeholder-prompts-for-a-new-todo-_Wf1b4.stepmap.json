@@ -1,0 +1,15 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://todomvc.com/examples/react/dist/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://todomvc.com/examples/react/dist/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "expect \"What needs to be done?\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "placeholder",
+    "stepTitle": "Step 1: expect \"What needs to be done?\" to be visible"
+  }
+]

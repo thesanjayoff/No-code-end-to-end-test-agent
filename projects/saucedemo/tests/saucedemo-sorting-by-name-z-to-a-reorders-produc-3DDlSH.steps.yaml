@@ -1,0 +1,11 @@
+title: "SauceDemo: sorting by name Z to A reorders products"
+startUrl: /
+environment: local
+tags:
+  - sort
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - select "Name (Z to A)" from the sort dropdown
+  - expect "Test.allTheThings() T-Shirt (Red)" to be visible

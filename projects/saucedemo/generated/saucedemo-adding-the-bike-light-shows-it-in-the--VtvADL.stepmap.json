@@ -1,0 +1,50 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://www.saucedemo.com/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://www.saucedemo.com/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill Username with \"standard_user\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: fill Username with \"standard_user\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: fill Password with \"secret_sauce\""
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "click the Login button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: click the Login button"
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Bike Light\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 4: click \"Add to cart\" for \"Sauce Labs Bike Light\""
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "click \"Cart, 1 items\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 5: click \"Cart, 1 items\""
+  },
+  {
+    "stepIndex": 6,
+    "sentence": "expect \"Sauce Labs Bike Light\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 6: expect \"Sauce Labs Bike Light\" to be visible"
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://www.saucedemo.com/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://www.saucedemo.com/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "expect \"Accepted usernames are\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 1: expect \"Accepted usernames are\" to be visible"
+  }
+]

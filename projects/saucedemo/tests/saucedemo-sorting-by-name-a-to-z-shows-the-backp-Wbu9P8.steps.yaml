@@ -1,0 +1,11 @@
+title: "SauceDemo: sorting by name A to Z shows the Backpack first"
+startUrl: /
+environment: local
+tags:
+  - sort
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - select "Name (A to Z)" from the sort dropdown
+  - expect "Sauce Labs Backpack" to be visible

@@ -1,0 +1,17 @@
+title: "SauceDemo: valid checkout info advances to the order overview"
+startUrl: /
+environment: local
+tags:
+  - checkout
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - click the Checkout button
+  - fill First Name with "Jordan"
+  - fill Last Name with "Lee"
+  - fill Zip/Postal Code with "12345"
+  - click the Continue button
+  - 'expect "Checkout: Overview" to be visible'

@@ -1,0 +1,13 @@
+title: "SauceDemo: All Items returns from a product detail page"
+startUrl: /
+environment: local
+tags:
+  - nav
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Sauce Labs Bike Light"
+  - click the Open Menu button
+  - click the All Items link
+  - expect the Products heading to be visible

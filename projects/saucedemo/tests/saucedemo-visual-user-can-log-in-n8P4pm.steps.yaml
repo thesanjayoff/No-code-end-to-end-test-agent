@@ -1,0 +1,11 @@
+title: "SauceDemo: visual_user can log in"
+startUrl: /
+environment: local
+tags:
+  - auth
+  - known-bug-account
+steps:
+  - fill Username with "visual_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - expect the Products heading to be visible

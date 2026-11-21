@@ -1,0 +1,13 @@
+title: "SauceDemo: continue shopping returns to the product list"
+startUrl: /
+environment: local
+tags:
+  - cart
+steps:
+  - fill Username with "standard_user"
+  - fill Password with "secret_sauce"
+  - click the Login button
+  - click "Add to cart" for "Sauce Labs Backpack"
+  - click "Cart, 1 items"
+  - click the Continue Shopping button
+  - expect the Products heading to be visible

@@ -1,0 +1,78 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to https://www.saucedemo.com/",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to https://www.saucedemo.com/"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill Username with \"standard_user\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: fill Username with \"standard_user\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "fill Password with \"secret_sauce\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: fill Password with \"secret_sauce\""
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "click the Login button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: click the Login button"
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Backpack\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 4: click \"Add to cart\" for \"Sauce Labs Backpack\""
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Bike Light\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 5: click \"Add to cart\" for \"Sauce Labs Bike Light\""
+  },
+  {
+    "stepIndex": 6,
+    "sentence": "click \"Add to cart\" for \"Sauce Labs Onesie\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 6: click \"Add to cart\" for \"Sauce Labs Onesie\""
+  },
+  {
+    "stepIndex": 7,
+    "sentence": "click \"Cart, 3 items\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 7: click \"Cart, 3 items\""
+  },
+  {
+    "stepIndex": 8,
+    "sentence": "expect \"Sauce Labs Backpack\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 8: expect \"Sauce Labs Backpack\" to be visible"
+  },
+  {
+    "stepIndex": 9,
+    "sentence": "expect \"Sauce Labs Bike Light\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 9: expect \"Sauce Labs Bike Light\" to be visible"
+  },
+  {
+    "stepIndex": 10,
+    "sentence": "expect \"Sauce Labs Onesie\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 10: expect \"Sauce Labs Onesie\" to be visible"
+  }
+]
