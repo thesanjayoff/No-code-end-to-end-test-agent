@@ -16,6 +16,7 @@ import { SecretVault } from "../safety/secrets.js";
 import { saveComponent, listComponents } from "../authoring/components.js";
 import { explore } from "../explore/explore.js";
 import { addSchedule, listSchedules, removeSchedule, startSchedulerDaemon, runScheduleNow } from "../scheduler/schedule.js";
+import { notify } from "../scheduler/notify.js";
 import { toJUnitXml } from "../reports/junit.js";
 import { renderHtmlReport } from "../reports/html.js";
 import { getTriage } from "../storage/repo.js";
@@ -57,6 +58,21 @@ project.command("list").action(() => {
     console.log(`${chalk.bold(p.id)}  allow-list: ${p.allowedDomains.join(", ")}${p.productionDomains.length ? chalk.red("  [has production domains]") : ""}`);
   }
 });
+
+project
+  .command("set-base-url <projectId> <environment> <url>")
+  .description("Set (or add) an environment's base URL -- e.g. to point 'production' at the URL a deploy pipeline just shipped.")
+  .requiredOption("--confirm-authorized", "confirms you own or are authorized to test this domain")
+  .action((projectId, environment, url) => {
+    const p = requireProject(projectId);
+    const host = new URL(url).hostname.toLowerCase();
+    if (!p.allowedDomains.some((d) => host === d || host.endsWith(`.${d}`))) {
+      console.log(chalk.yellow(`Warning: "${host}" isn't on project "${projectId}"'s allow-list yet. Tests against it will be blocked until you run "testwise project allow ${projectId} ${host} --confirm-authorized".`));
+    }
+    p.environments[environment] = { ...p.environments[environment], baseUrl: url };
+    saveProject(p);
+    console.log(chalk.green(`Set "${environment}" base URL to ${url} for project "${projectId}".`));
+  });
 
 project
   .command("allow <projectId> <domain>")
@@ -108,11 +124,17 @@ test
     console.log(chalk.gray(`Generated: ${getTest(report.test.id)?.specPath}`));
   });
 
-test.command("list [projectId]").action((projectId) => {
-  for (const t of listTests(projectId)) {
-    console.log(`${chalk.bold(t.id)}  "${t.title}"  ${t.quarantined ? chalk.magenta("[quarantined]") : ""}`);
-  }
-});
+test
+  .command("list [projectId]")
+  .option("--tag <tag>", "only tests carrying this tag")
+  .option("--ids-only", "print just the ids, one per line (for piping into `test run`/`trigger`)", false)
+  .action((projectId, opts) => {
+    const tests = listTests(projectId).filter((t) => !opts.tag || t.tags.includes(opts.tag));
+    for (const t of tests) {
+      if (opts.idsOnly) console.log(t.id);
+      else console.log(`${chalk.bold(t.id)}  "${t.title}"  ${t.quarantined ? chalk.magenta("[quarantined]") : ""}`);
+    }
+  });
 
 test.command("show <testId>").action((testId) => {
   const t = requireTest(testId);
@@ -128,14 +150,16 @@ test.command("approve-destructive <testId>").action((testId) => {
 });
 
 test
-  .command("run <testIds...>")
+  .command("run [testIds...]")
+  .option("--tag <tag>", "run every test (optionally scoped by --project) carrying this tag, instead of listing ids")
+  .option("--project <projectId>", "scope --tag to one project")
   .option("--browser <browsers>", "comma-separated: chromium,firefox,webkit", "chromium")
   .option("--viewport <viewports>", "comma-separated: desktop,mobile", "desktop")
   .option("--headed", "run headed", false)
   .option("--retries <n>", "retries (tracked separately as flaky, not a clean pass)", "1")
   .option("--workers <n>", "parallel workers")
   .action(async (testIds: string[], opts) => {
-    const tests = testIds.map((id) => requireTest(id));
+    const tests = resolveTestSelection(testIds, opts);
     const runs = await runTests({
       tests,
       browsers: opts.browser.split(",") as any,
@@ -325,19 +349,29 @@ schedule.command("run-now <id>").action(async (id) => {
 // ---------- webhook trigger (CI / post-deploy) ----------
 
 program
-  .command("trigger <testIds...>")
+  .command("trigger [testIds...]")
   .description("CLI trigger for CI/post-deploy hooks: runs tests and exits non-zero on failure.")
+  .option("--tag <tag>", "run every test (optionally scoped by --project) carrying this tag, instead of listing ids")
+  .option("--project <projectId>", "scope --tag to one project")
   .option("--browser <browsers>", "comma-separated browsers", "chromium")
+  .option("--webhook <url>", "webhook to notify on any failure (e.g. a Slack incoming webhook)")
   .action(async (testIds: string[], opts) => {
-    const tests = testIds.map((id) => requireTest(id));
+    const tests = resolveTestSelection(testIds, opts);
     const runs = await runTests({ tests, browsers: opts.browser.split(","), viewports: ["desktop"], retries: 1 });
-    let failed = false;
+    const failures: string[] = [];
     for (const run of runs) {
       insertRun(run);
-      if (run.status === "failed") failed = true;
+      if (run.status === "failed") failures.push(run.testId);
       console.log(`${run.status}  ${run.testId}`);
     }
-    process.exit(failed ? 1 : 0);
+    if (failures.length && opts.webhook) {
+      await notify({
+        webhookUrl: opts.webhook,
+        subject: `Testwise: ${failures.length} test(s) failed`,
+        message: `Failed: ${failures.join(", ")}`,
+      });
+    }
+    process.exit(failures.length ? 1 : 0);
   });
 
 // ---------- reports ----------
@@ -452,6 +486,15 @@ function requireTest(id: string) {
   const t = getTest(id);
   if (!t) throw new Error(`No test "${id}".`);
   return t;
+}
+
+/** Resolves a test selection from explicit ids, or --tag (optionally scoped by --project) when no ids were given. */
+function resolveTestSelection(testIds: string[], opts: { tag?: string; project?: string }) {
+  if (testIds.length) return testIds.map((id) => requireTest(id));
+  if (!opts.tag) throw new Error("Pass explicit test ids, or --tag to select by tag.");
+  const tests = listTests(opts.project).filter((t) => t.tags.includes(opts.tag!));
+  if (!tests.length) throw new Error(`No tests found with tag "${opts.tag}"${opts.project ? ` in project "${opts.project}"` : ""}.`);
+  return tests;
 }
 
 function requireHeal(id: string) {

@@ -1,0 +1,27 @@
+# Example: run smoke tests against what was just deployed. Have your
+# deploy pipeline send a `repository_dispatch` event (type:
+# "deployed") with the deployed URL, after a successful deploy. Copy
+# into your project's own .github/workflows/, not Testwise's.
+name: Post-deploy smoke tests
+
+on:
+  repository_dispatch:
+    types: [deployed]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # The event payload's `deployed_url` lets you point this run's
+      # environment at the exact deployment that just went out, rather than
+      # whatever the project's base URL happens to be configured to today.
+      - name: Point the project at the just-deployed URL
+        run: npx testwise project set-base-url my-project production "${{ github.event.client_payload.deployed_url }}"
+      - name: Run smoke-tagged tests against it
+        run: npx testwise trigger --project my-project --tag smoke --webhook "${{ secrets.TESTWISE_WEBHOOK_URL }}"

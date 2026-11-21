@@ -1,0 +1,21 @@
+# Example: run a tagged suite on a schedule, notifying a webhook on
+# failure. Copy into your project's own .github/workflows/, not Testwise's.
+name: Testwise nightly smoke suite
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: {} # lets you also trigger it manually from the Actions tab
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run smoke-tagged tests
+        run: npx testwise trigger --project my-project --tag smoke --webhook "${{ secrets.TESTWISE_WEBHOOK_URL }}"
