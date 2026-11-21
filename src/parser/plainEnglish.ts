@@ -8,7 +8,8 @@ function stripGherkin(sentence: string): { body: string; gherkin?: ParsedStep["g
   const m = sentence.match(GHERKIN_PREFIX);
   if (!m) return { body: sentence };
   const kw = m[1].toLowerCase() as ParsedStep["gherkin"];
-  return { body: sentence.slice(m[0].length), gherkin: kw };
+  const rest = sentence.slice(m[0].length).replace(/^I'?m?\s+/i, "").replace(/^I\s+/i, "");
+  return { body: rest, gherkin: kw };
 }
 
 /** Pulls a quoted or trailing literal value out of a sentence fragment, e.g. `fill username with "bob"`. */
@@ -23,7 +24,8 @@ function warnIfAmbiguous(target: string | undefined, warnings: string[]): void {
   const normalized = target.toLowerCase().trim();
   const words = normalized.split(/\s+/);
   const lastWord = words[words.length - 1]?.replace(/[^a-z]/g, "");
-  const hasQualifier = words.length > 1 || /["“]/.test(target);
+  const meaningfulWords = words.filter((w) => !["the", "a", "an", "this", "that"].includes(w));
+  const hasQualifier = meaningfulWords.length > 1 || /["“]/.test(target);
   if (GENERIC_TARGET_WORDS.has(lastWord) && !hasQualifier) {
     warnings.push(`Ambiguous target "${target}" -- which ${lastWord}? Add a label, e.g. "the Submit button".`);
   }
