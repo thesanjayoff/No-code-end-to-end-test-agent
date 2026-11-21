@@ -60,6 +60,16 @@ function variantOf(req: express.Request): string {
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
+// A genuinely flaky page for the stability-check evaluation: the "Ready"
+// badge appears almost instantly most of the time, but ~30% of loads it's
+// delayed past a normal assertion timeout -- a real, non-deterministic
+// timing race, not a scripted pass/fail, so repeated runs legitimately
+// disagree with each other.
+app.get("/flaky", (_req, res) => {
+  const delayMs = Math.random() < 0.3 ? 6000 : 100;
+  res.send(layout("Flaky", `<p id="flaky-badge" style="display:none">Ready</p><script>setTimeout(() => { document.getElementById('flaky-badge').style.display = 'block'; }, ${delayMs});</script>`));
+});
+
 app.get("/", (req, res) => {
   const variant = variantOf(req);
   const addLabel = variant === "drift_rename" ? "Add to bag" : "Add to cart";

@@ -94,6 +94,18 @@ export class SecretVault {
   }
 }
 
+const SECRET_PLACEHOLDER = /^\{\{secret:([^}]+)\}\}$/;
+
+/** True for a step value written as `{{secret:name}}` rather than a literal. */
+export function isSecretPlaceholder(value: string): boolean {
+  return SECRET_PLACEHOLDER.test(value.trim());
+}
+
+/** The vault entry name referenced by a `{{secret:name}}` placeholder, if any. */
+export function parseSecretPlaceholder(value: string): string | undefined {
+  return SECRET_PLACEHOLDER.exec(value.trim())?.[1];
+}
+
 const MASK = "••••••••";
 
 /** Replaces every known secret value with a mask. Used on logs, prompts, traces metadata, and reports. */

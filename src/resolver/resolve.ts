@@ -8,7 +8,7 @@ import { assertAllowListed, checkAllowListed } from "../safety/allowlist.js";
 import { evaluateDestructiveGuard } from "../safety/destructive.js";
 import { wrapUntrusted, scanForInjection } from "../safety/injection.js";
 import { substituteTemplates } from "./testData.js";
-import { SecretVault } from "../safety/secrets.js";
+import { SecretVault, parseSecretPlaceholder } from "../safety/secrets.js";
 import { getLlmProvider } from "../llm/index.js";
 import type { LlmProvider } from "../llm/provider.js";
 
@@ -130,6 +130,22 @@ export interface StepResolveContext {
 }
 
 export async function resolveOneStep(page: Page, rawStep: ParsedStep, ctx: StepResolveContext): Promise<ResolvedStep> {
+  const resolved = await resolveOneStepInner(page, rawStep, ctx);
+  // {{secret:name}} is substituted with the real value above, for the live
+  // action only. Every return path below builds its result by spreading
+  // that already-substituted step, so without this, the real secret would
+  // end up written into resolved.json and the generated spec. Put the
+  // placeholder back before anything persists it -- codegen's valueExpr()
+  // recognizes it and renders a runtime vault lookup instead of a literal.
+  // Other templates ({{random_name}}, {{unique_email}}, {{env:KEY}}) are
+  // deliberately left baked in: they aren't secrets, and baking them in
+  // keeps replays using the same fixed test data every run.
+  if (parseSecretPlaceholder(rawStep.data ?? "")) resolved.data = rawStep.data;
+  if (parseSecretPlaceholder(rawStep.expected ?? "")) resolved.expected = rawStep.expected;
+  return resolved;
+}
+
+async function resolveOneStepInner(page: Page, rawStep: ParsedStep, ctx: StepResolveContext): Promise<ResolvedStep> {
   const screenshotPath = path.join(ctx.screenshotDir, `step-${String(rawStep.index).padStart(2, "0")}.png`);
   const subCtx = { env: ctx.envVars, vault: ctx.vault };
   const step: ParsedStep = {
@@ -219,6 +235,8 @@ async function performAction(page: Page, step: ParsedStep, locator: ReturnType<P
       await locator.first().click();
       return;
     case "fill":
+      // step.data has already gone through substituteTemplates() above,
+      // so a {{secret:name}} placeholder is already the real value here.
       await locator.first().fill(step.data ?? "");
       return;
     case "select":
@@ -402,33 +420,53 @@ async function verifyAssertion(page: Page, step: ParsedStep, ctx: StepResolveCon
   try {
     switch (step.action) {
       case "expect_visible": {
-        const visible = await locator.isVisible();
+        // The generated assertion (toBeVisible) auto-waits at replay time;
+        // mirror that tolerance here with a short poll, so authoring
+        // against ordinary async-rendered content (a spinner, a toast, a
+        // badge that appears a moment after load) doesn't spuriously fail
+        // just because the check landed before the page settled.
+        const visible = await pollUntil(() => locator.isVisible());
         return { ...base, resolutionOk: visible, resolutionNote: visible ? undefined : "Element is not visible." };
       }
       case "expect_enabled": {
-        const enabled = await locator.isEnabled();
+        const enabled = await pollUntil(() => locator.isEnabled());
         return { ...base, resolutionOk: enabled, resolutionNote: enabled ? undefined : "Element is disabled." };
       }
       case "expect_disabled": {
-        const enabled = await locator.isEnabled();
-        return { ...base, resolutionOk: !enabled, resolutionNote: !enabled ? undefined : "Element is enabled, expected disabled." };
+        const disabled = await pollUntil(async () => !(await locator.isEnabled()));
+        return { ...base, resolutionOk: disabled, resolutionNote: disabled ? undefined : "Element is enabled, expected disabled." };
       }
       case "expect_text": {
-        const text = (await locator.innerText().catch(() => locator.textContent())) ?? "";
         const expected = step.expected ?? "";
-        const ok = (text ?? "").includes(expected);
-        return { ...base, resolutionOk: ok, resolutionNote: ok ? undefined : `Text was "${text}", expected it to contain "${expected}".` };
+        let lastText = "";
+        const ok = await pollUntil(async () => {
+          lastText = (await locator.innerText().catch(() => locator.textContent())) ?? "";
+          return lastText.includes(expected);
+        });
+        return { ...base, resolutionOk: ok, resolutionNote: ok ? undefined : `Text was "${lastText}", expected it to contain "${expected}".` };
       }
       case "expect_value": {
-        const value = await locator.inputValue().catch(() => "");
         const expected = step.expected ?? "";
-        const ok = value === expected;
-        return { ...base, resolutionOk: ok, resolutionNote: ok ? undefined : `Value was "${value}", expected "${expected}".` };
+        let lastValue = "";
+        const ok = await pollUntil(async () => {
+          lastValue = await locator.inputValue().catch(() => "");
+          return lastValue === expected;
+        });
+        return { ...base, resolutionOk: ok, resolutionNote: ok ? undefined : `Value was "${lastValue}", expected "${expected}".` };
       }
       default:
         return { ...base, resolutionOk: false, resolutionNote: "Unsupported assertion." };
     }
   } catch (err: any) {
     return { ...base, resolutionOk: false, resolutionNote: err?.message ?? String(err) };
+  }
+}
+
+async function pollUntil(check: () => Promise<boolean>, timeoutMs = 3000, intervalMs = 100): Promise<boolean> {
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    if (await check()) return true;
+    if (Date.now() >= deadline) return false;
+    await new Promise((r) => setTimeout(r, intervalMs));
   }
 }

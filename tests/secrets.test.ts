@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { describe, it, expect, afterEach } from "vitest";
-import { SecretVault, maskSecrets } from "../src/safety/secrets.js";
+import { SecretVault, maskSecrets, isSecretPlaceholder, parseSecretPlaceholder } from "../src/safety/secrets.js";
 import { VAULT_PATH } from "../src/config/env.js";
 
 const scope = `test-${Date.now()}`;
@@ -37,5 +37,15 @@ describe("secret vault", () => {
     const vault = new SecretVault();
     vault.set("card_number", "4111111111111111", scope);
     expect(vault.list(scope)).toContain("card_number");
+  });
+
+  it("recognizes a {{secret:name}} placeholder and extracts its name", () => {
+    expect(isSecretPlaceholder("{{secret:api_key}}")).toBe(true);
+    expect(parseSecretPlaceholder("{{secret:api_key}}")).toBe("api_key");
+  });
+
+  it("does not treat an ordinary value as a secret placeholder", () => {
+    expect(isSecretPlaceholder("standard_user")).toBe(false);
+    expect(parseSecretPlaceholder("standard_user")).toBeUndefined();
   });
 });
