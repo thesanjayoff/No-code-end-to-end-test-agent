@@ -432,7 +432,7 @@ program.command("serve").action(async () => {
 });
 
 program.command("seed").action(async () => {
-  const { seedDemoProjects } = await import("../../eval/seed.js");
+  const { seedDemoProjects } = await import("../demo/seed.js");
   await seedDemoProjects();
 });
 
