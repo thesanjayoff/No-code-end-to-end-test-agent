@@ -95,7 +95,14 @@ export async function runTests(opts: RunOptions): Promise<RunRecord[]> {
   const resultsJson = path.join(os.tmpdir(), `testwise-results-${nanoid(8)}.json`);
   const outputDir = path.join(os.tmpdir(), `testwise-output-${nanoid(8)}`);
 
-  const specFiles = opts.tests.map((t) => t.specPath).filter((p): p is string => !!p);
+  // Pass paths relative to the config's testDir ("projects"), with forward
+  // slashes, as Playwright's CLI path filter matches against POSIX-style
+  // relative paths -- an absolute Windows path with backslashes silently
+  // fails to filter, which previously made it run every generated spec.
+  const specFiles = opts.tests
+    .map((t) => t.specPath)
+    .filter((p): p is string => !!p)
+    .map((p) => path.relative(path.join(ROOT_DIR, "projects"), p).split(path.sep).join("/"));
   if (specFiles.length === 0) return [];
 
   const env = {
@@ -110,11 +117,12 @@ export async function runTests(opts: RunOptions): Promise<RunRecord[]> {
   };
 
   await new Promise<void>((resolve) => {
-    const child = spawn(
-      process.platform === "win32" ? "npx.cmd" : "npx",
-      ["playwright", "test", ...specFiles, "--config=playwright.config.ts"],
-      { cwd: ROOT_DIR, env, stdio: "inherit" }
-    );
+    const child = spawn("npx", ["playwright", "test", ...specFiles, "--config=playwright.config.ts"], {
+      cwd: ROOT_DIR,
+      env,
+      stdio: "inherit",
+      shell: true,
+    });
     child.on("close", () => resolve());
     child.on("error", () => resolve());
   });

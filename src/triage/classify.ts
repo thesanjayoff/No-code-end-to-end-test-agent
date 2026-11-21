@@ -8,7 +8,12 @@ export interface StepKindLookup {
 
 const LOCATOR_FAILURE_PATTERNS = [/waiting for locator/i, /element is not attached/i, /timeout.*exceeded/i, /locator\.(click|fill|check|hover|selectOption)/i];
 const ASSERTION_FAILURE_PATTERNS = [/expect\(.*\)\.(toBeVisible|toBeEnabled|toBeDisabled|toContainText|toHaveValue|toHaveCount|toHaveURL)/i, /received:/i, /expected:/i];
-const NETWORK_SIGNAL_PATTERNS = [/5\d\d/, /net::ERR/i, /ECONNREFUSED/i, /failed to load/i, /ERR_NAME_NOT_RESOLVED/i];
+// Only applied to structured run.networkErrors entries (e.g. "502 https://..."),
+// never to the raw Playwright error string -- "Timeout: 5000ms" would otherwise
+// false-positive-match the bare /5\d\d/ status-code pattern.
+const NETWORK_STATUS_PATTERNS = [/^\d?5\d\d\b/, /net::ERR/i, /ECONNREFUSED/i, /failed to load/i, /ERR_NAME_NOT_RESOLVED/i];
+// Narrower set safe to run against the raw error text itself.
+const NETWORK_ERRORTEXT_PATTERNS = [/net::ERR/i, /ECONNREFUSED/i, /ERR_NAME_NOT_RESOLVED/i, /ERR_CONNECTION_REFUSED/i];
 
 function firstFailedStep(steps: StepRunResult[]): StepRunResult | undefined {
   return steps.find((s) => s.status === "failed");
@@ -36,7 +41,8 @@ export function classifyDeterministic(run: RunRecord, stepKind: StepKindLookup):
   const errorText = (failedStep?.error ?? run.error ?? "").slice(0, 4000);
   const kind = failedStep ? stepKind(failedStep.index) : undefined;
 
-  const hasNetworkSignal = run.networkErrors.some((e) => NETWORK_SIGNAL_PATTERNS.some((p) => p.test(e))) || NETWORK_SIGNAL_PATTERNS.some((p) => p.test(errorText));
+  const hasNetworkSignal =
+    run.networkErrors.some((e) => NETWORK_STATUS_PATTERNS.some((p) => p.test(e))) || NETWORK_ERRORTEXT_PATTERNS.some((p) => p.test(errorText));
   if (hasNetworkSignal) {
     evidence.push({ signal: "network_errors", detail: run.networkErrors.slice(0, 3).join("; ") || errorText.slice(0, 200) });
     return { runId: run.id, classification: "environment", confidence: 0.75, evidence };

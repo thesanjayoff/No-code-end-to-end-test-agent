@@ -57,6 +57,14 @@ describe("deterministic triage classifier", () => {
     expect(result.classification).toBe("environment");
   });
 
+  it("does not mistake a '5000ms' timeout for a 5xx network status", () => {
+    const run = baseRun({
+      stepResults: [{ index: 2, sentence: "expect total", status: "failed", durationMs: 10, error: "expect(locator).toContainText failed\nTimeout: 5000ms" }],
+    });
+    const result = classifyDeterministic(run, (i) => (i === 2 ? "assertion" : "action"));
+    expect(result.classification).toBe("real_bug");
+  });
+
   it("falls back to unknown when nothing matches", () => {
     const run = baseRun({ stepResults: [{ index: 1, sentence: "???", status: "failed", durationMs: 1, error: "something weird happened" }] });
     const result = classifyDeterministic(run, () => undefined);

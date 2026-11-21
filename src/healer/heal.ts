@@ -80,6 +80,9 @@ export async function proposeHeal(opts: ProposeHealOptions): Promise<HealProposa
   fs.mkdirSync(ctx.screenshotDir, { recursive: true });
 
   try {
+    if (oldSteps[0]?.action !== "goto") {
+      await page.goto(opts.test.startUrl, { waitUntil: "domcontentloaded" });
+    }
     for (const step of oldSteps) {
       if (step.index >= opts.failedStepIndex) break;
       await resolveOneStep(page, step, ctx);

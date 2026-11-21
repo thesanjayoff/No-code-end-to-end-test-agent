@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { createProject, loadProject } from "../src/storage/project.js";
 import { authorTest } from "../src/authoring/author.js";
 import type { TestSource } from "../src/parser/index.js";
@@ -14,11 +15,12 @@ export async function ensureDemoAppRunning(): Promise<void> {
     /* not running yet */
   }
   console.log("Starting the BuggyMart demo app...");
-  spawn(process.platform === "win32" ? "npx.cmd" : "npx", ["tsx", "demo-app/server.ts"], {
+  const child = spawn("npx", ["tsx", "demo-app/server.ts"], {
     env: { ...process.env, DEMO_APP_PORT: String(DEMO_APP_PORT) },
     stdio: "inherit",
-    detached: process.platform !== "win32",
+    shell: true,
   });
+  child.unref();
   for (let i = 0; i < 30; i++) {
     await new Promise((r) => setTimeout(r, 500));
     try {
@@ -155,7 +157,7 @@ export async function seedDemoProjects(): Promise<void> {
   console.log("Seeding complete.");
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   seedDemoProjects().catch((err) => {
     console.error(err);
     process.exit(1);

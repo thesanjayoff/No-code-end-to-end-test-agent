@@ -53,6 +53,14 @@ export function generateSpec(opts: { title: string; startUrl: string; steps: Res
   let varCounter = 0;
   const blocks: string[] = [];
 
+  // The start URL is the test's initial navigation, mirroring the resolver:
+  // emit it unless the author's own first step is already a "go to".
+  if (opts.steps[0]?.action !== "goto") {
+    const title = `Step 0: go to ${opts.startUrl}`;
+    blocks.push(`  await test.step(${JSON.stringify(title)}, async () => {\n    await page.goto(${JSON.stringify(opts.startUrl)});\n  });`);
+    stepMap.push({ stepIndex: 0, sentence: `go to ${opts.startUrl}`, usedAi: false, stepTitle: title });
+  }
+
   for (const step of opts.steps) {
     const inner: string[] = [];
     if (!step.resolutionOk && step.kind === "action") {

@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
-import { chromium, type Browser, type Page } from "playwright";
-import type { ParsedStep, ProjectConfig, ResolvedStep } from "../types.js";
-import { buildLocatorCandidates } from "./locatorStrategies.js";
+import { chromium, type Browser, type Locator, type Page } from "playwright";
+import type { LocatorStrategy, ParsedStep, ProjectConfig, ResolvedStep } from "../types.js";
+import { buildLocatorCandidates, CONTEXT_CONTAINER_SELECTOR } from "./locatorStrategies.js";
 import { pickBest } from "../locator/rank.js";
 import { assertAllowListed, checkAllowListed } from "../safety/allowlist.js";
 import { evaluateDestructiveGuard } from "../safety/destructive.js";
@@ -66,6 +66,13 @@ export async function runResolution(opts: ResolveOptions): Promise<ResolveReport
   let abortReason: string | undefined;
 
   try {
+    // The start URL is the initial navigation; an explicit "go to" step
+    // (if the author wrote one) can still navigate elsewhere afterwards.
+    const firstStepIsGoto = opts.steps[0]?.action === "goto";
+    if (!firstStepIsGoto) {
+      await page.goto(opts.startUrl, { waitUntil: "domcontentloaded" });
+    }
+
     for (const step of opts.steps) {
       if (aborted) {
         resolvedSteps.push({ ...step, resolutionOk: false, resolutionNote: "Skipped: resolution aborted earlier.", usedAi: false });
@@ -232,6 +239,29 @@ async function performAction(page: Page, step: ParsedStep, locator: ReturnType<P
 export async function findTarget(page: Page, step: ParsedStep, ctx: StepResolveContext) {
   const description = step.targetDescription ?? "";
   let candidates = buildLocatorCandidates(description);
+  // For "expect X to show Y" steps, X often has no locatable name of its own
+  // (a bare status/message region) while Y, its expected content, does --
+  // so also try locating by the expected text itself, deterministically.
+  if (step.action === "expect_text" && step.expected) {
+    candidates = [...candidates, ...buildLocatorCandidates(step.expected)];
+  }
+  if (step.contextDescription) {
+    const context = step.contextDescription;
+    candidates = candidates.map((c) => ({
+      ...c,
+      code: `locator(${JSON.stringify(CONTEXT_CONTAINER_SELECTOR)}).filter({ hasText: ${JSON.stringify(context)} }).${c.code}`,
+      description: `${c.description} within an item containing "${context}"`,
+      locate: (p: Page | Locator) => c.locate(p.locator(CONTEXT_CONTAINER_SELECTOR).filter({ hasText: context })),
+    }));
+  }
+  // A checkbox/radio is rarely matched by its own visible text -- that text
+  // usually belongs to an adjacent <label> (as in TodoMVC's "Walk the dog").
+  // Matching by text there finds a real, unique element that simply isn't
+  // checkable, which is worse than finding nothing. Restrict to strategies
+  // that actually target form controls for these two actions.
+  if (step.action === "check" || step.action === "uncheck") {
+    candidates = candidates.filter((c) => c.strategy === "role" || c.strategy === "testid" || c.strategy === "label");
+  }
   const counted = await Promise.all(candidates.map(async (c) => ({ ...c, matchCount: await matchCount(page, c.locate) })));
   let { best, ranked, ambiguous } = pickBest(counted);
   let usedAi = false;
@@ -310,29 +340,38 @@ async function askLlmForTarget(page: Page, description: string, ctx: StepResolve
   }
 }
 
-async function verifyAssertion(
-  page: Page,
-  step: ParsedStep,
-  ctx: StepResolveContext
-): Promise<{ resolutionOk: boolean; resolutionNote?: string; usedAi: boolean; candidates?: ResolvedStep["candidates"] }> {
+type AssertionResult = {
+  resolutionOk: boolean;
+  resolutionNote?: string;
+  usedAi: boolean;
+  candidates?: ResolvedStep["candidates"];
+  locator?: ResolvedStep["locator"];
+};
+
+async function verifyAssertion(page: Page, step: ParsedStep, ctx: StepResolveContext): Promise<AssertionResult> {
   if (step.action === "expect_count") {
     // Count assertions intentionally want >1 match, so the uniqueness-penalizing
     // ranking in pickBest() doesn't apply here -- just take the first candidate
     // (in stability order) that matches anything on the page.
     const description = step.targetDescription ?? "";
     const candidates = buildLocatorCandidates(description);
-    let chosen: { description: string; count: number } | undefined;
+    let chosen: { strategy: LocatorStrategy; code: string; description: string; count: number } | undefined;
     for (const c of candidates) {
       const n = await matchCount(page, c.locate);
       if (n > 0) {
-        chosen = { description: c.description, count: n };
+        chosen = { strategy: c.strategy, code: c.code, description: c.description, count: n };
         break;
       }
     }
     if (!chosen) return { resolutionOk: false, resolutionNote: `No elements matching "${description}" found at all.`, usedAi: false };
     const expected = Number(step.expected ?? "0");
     const ok = chosen.count === expected;
-    return { resolutionOk: ok, resolutionNote: ok ? undefined : `Found ${chosen.count} matching "${chosen.description}", expected ${expected}.`, usedAi: false };
+    return {
+      resolutionOk: ok,
+      resolutionNote: ok ? undefined : `Found ${chosen.count} matching "${chosen.description}", expected ${expected}.`,
+      usedAi: false,
+      locator: { strategy: chosen.strategy, code: chosen.code, description: chosen.description, confidence: ok ? 0.9 : 0.5 },
+    };
   }
 
   const found = await findTarget(page, step, ctx);
@@ -340,37 +379,38 @@ async function verifyAssertion(
     return { resolutionOk: false, resolutionNote: found.note, usedAi: found.usedAi, candidates: found.candidates };
   }
   const locator = found.locator.first();
+  const base = { usedAi: found.usedAi, candidates: found.candidates, locator: found.resolvedLocator };
 
   try {
     switch (step.action) {
       case "expect_visible": {
         const visible = await locator.isVisible();
-        return { resolutionOk: visible, resolutionNote: visible ? undefined : "Element is not visible.", usedAi: found.usedAi, candidates: found.candidates };
+        return { ...base, resolutionOk: visible, resolutionNote: visible ? undefined : "Element is not visible." };
       }
       case "expect_enabled": {
         const enabled = await locator.isEnabled();
-        return { resolutionOk: enabled, resolutionNote: enabled ? undefined : "Element is disabled.", usedAi: found.usedAi, candidates: found.candidates };
+        return { ...base, resolutionOk: enabled, resolutionNote: enabled ? undefined : "Element is disabled." };
       }
       case "expect_disabled": {
         const enabled = await locator.isEnabled();
-        return { resolutionOk: !enabled, resolutionNote: !enabled ? undefined : "Element is enabled, expected disabled.", usedAi: found.usedAi, candidates: found.candidates };
+        return { ...base, resolutionOk: !enabled, resolutionNote: !enabled ? undefined : "Element is enabled, expected disabled." };
       }
       case "expect_text": {
         const text = (await locator.innerText().catch(() => locator.textContent())) ?? "";
         const expected = step.expected ?? "";
         const ok = (text ?? "").includes(expected);
-        return { resolutionOk: ok, resolutionNote: ok ? undefined : `Text was "${text}", expected it to contain "${expected}".`, usedAi: found.usedAi, candidates: found.candidates };
+        return { ...base, resolutionOk: ok, resolutionNote: ok ? undefined : `Text was "${text}", expected it to contain "${expected}".` };
       }
       case "expect_value": {
         const value = await locator.inputValue().catch(() => "");
         const expected = step.expected ?? "";
         const ok = value === expected;
-        return { resolutionOk: ok, resolutionNote: ok ? undefined : `Value was "${value}", expected "${expected}".`, usedAi: found.usedAi, candidates: found.candidates };
+        return { ...base, resolutionOk: ok, resolutionNote: ok ? undefined : `Value was "${value}", expected "${expected}".` };
       }
       default:
-        return { resolutionOk: false, resolutionNote: "Unsupported assertion.", usedAi: found.usedAi };
+        return { ...base, resolutionOk: false, resolutionNote: "Unsupported assertion." };
     }
   } catch (err: any) {
-    return { resolutionOk: false, resolutionNote: err?.message ?? String(err), usedAi: found.usedAi, candidates: found.candidates };
+    return { ...base, resolutionOk: false, resolutionNote: err?.message ?? String(err) };
   }
 }

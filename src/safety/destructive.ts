@@ -33,6 +33,10 @@ export interface DestructiveFinding {
 export function findDestructiveSteps(steps: ParsedStep[]): DestructiveFinding[] {
   const findings: DestructiveFinding[] = [];
   for (const step of steps) {
+    // Only actions actually DO something irreversible. An assertion merely
+    // reading state -- "expect the Checkout button to be enabled" -- should
+    // never trip this guard just because its sentence contains "checkout".
+    if (step.kind !== "action") continue;
     for (const pattern of DESTRUCTIVE_PATTERNS) {
       const match = step.sentence.match(pattern);
       if (match) {

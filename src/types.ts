@@ -32,6 +32,8 @@ export interface ParsedStep {
   action: StepAction;
   /** Natural-language description of the target element, e.g. "the Pay button". */
   targetDescription?: string;
+  /** For "click X for Y" / repeated-item steps: scopes the search to the item/row containing this text. */
+  contextDescription?: string;
   /** Literal data to type/select/upload, after variable substitution markers are preserved. */
   data?: string;
   /** Expected result text for assertions, e.g. "₹" or "enabled". */
@@ -51,7 +53,7 @@ export interface ParseResult {
   warnings: string[];
 }
 
-export type LocatorStrategy = "role" | "label" | "testid" | "text" | "css";
+export type LocatorStrategy = "role" | "label" | "placeholder" | "testid" | "text" | "css";
 
 export interface ResolvedLocator {
   strategy: LocatorStrategy;

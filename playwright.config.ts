@@ -35,6 +35,8 @@ for (const browser of browsers) {
 }
 
 export default defineConfig({
+  testDir: "projects",
+  testMatch: /.*\.spec\.ts$/,
   retries,
   workers,
   outputDir,
