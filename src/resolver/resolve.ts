@@ -146,7 +146,10 @@ export async function resolveOneStep(page: Page, rawStep: ParsedStep, ctx: StepR
         if (!check.ok) return { ...step, resolutionOk: false, resolutionNote: check.reason, usedAi: false };
         await page.goto(url, { waitUntil: "domcontentloaded" });
         await page.screenshot({ path: screenshotPath });
-        return { ...step, resolutionOk: true, screenshotPath, usedAi: false };
+        // Save the fully-resolved absolute URL, not the author's relative
+        // one -- codegen emits `page.goto(step.data)` verbatim at replay
+        // time, with no base URL of its own to resolve a relative path against.
+        return { ...step, data: url, resolutionOk: true, screenshotPath, usedAi: false };
       }
       case "wait": {
         await page.waitForTimeout(Number(step.data ?? 500));
@@ -354,6 +357,7 @@ async function verifyAssertion(page: Page, step: ParsedStep, ctx: StepResolveCon
     // ranking in pickBest() doesn't apply here -- just take the first candidate
     // (in stability order) that matches anything on the page.
     const description = step.targetDescription ?? "";
+    const expected = Number(step.expected ?? "0");
     const candidates = buildLocatorCandidates(description);
     let chosen: { strategy: LocatorStrategy; code: string; description: string; count: number } | undefined;
     for (const c of candidates) {
@@ -363,8 +367,22 @@ async function verifyAssertion(page: Page, step: ParsedStep, ctx: StepResolveCon
         break;
       }
     }
-    if (!chosen) return { resolutionOk: false, resolutionNote: `No elements matching "${description}" found at all.`, usedAi: false };
-    const expected = Number(step.expected ?? "0");
+    if (!chosen) {
+      // Every candidate matched nothing at all -- if 0 is exactly what was
+      // expected, that's a genuine pass (e.g. "expect 0 shopping cart
+      // badge" on an empty cart, where the badge element doesn't render),
+      // not an unresolvable step. Report via the first (highest-priority)
+      // candidate so the saved locator is still the stable one to recheck.
+      const first = candidates[0];
+      if (expected === 0 && first) {
+        return {
+          resolutionOk: true,
+          usedAi: false,
+          locator: { strategy: first.strategy, code: first.code, description: first.description, confidence: 0.7 },
+        };
+      }
+      return { resolutionOk: false, resolutionNote: `No elements matching "${description}" found at all.`, usedAi: false };
+    }
     const ok = chosen.count === expected;
     return {
       resolutionOk: ok,
