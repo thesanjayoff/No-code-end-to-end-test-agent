@@ -1,0 +1,22 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to http://localhost:4799/?variant=baseline",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to http://localhost:4799/?variant=baseline"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "expect the Shop heading to be visible",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: expect the Shop heading to be visible"
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "expect \"Wireless Mouse\" to be visible",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 2: expect \"Wireless Mouse\" to be visible"
+  }
+]

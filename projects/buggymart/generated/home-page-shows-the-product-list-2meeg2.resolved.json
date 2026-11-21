@@ -1,0 +1,136 @@
+[
+  {
+    "index": 1,
+    "sentence": "expect the Shop heading to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "the Shop heading",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('heading', { name: 'Shop' })",
+        "description": "role=heading name=\"Shop\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Shop')",
+        "description": "text=\"Shop\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Shop')",
+        "description": "label=\"Shop\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Shop')",
+        "description": "placeholder=\"Shop\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('shop')",
+        "description": "data-testid=\"shop\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#shop')",
+        "description": "css id=\"#shop\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('heading', { name: 'Shop' })",
+      "description": "role=heading name=\"Shop\"",
+      "confidence": 0.95
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-01.png"
+  },
+  {
+    "index": 2,
+    "sentence": "expect \"Wireless Mouse\" to be visible",
+    "kind": "assertion",
+    "action": "expect_visible",
+    "warnings": [],
+    "targetDescription": "\"Wireless Mouse\"",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('Wireless Mouse')",
+        "description": "text=\"Wireless Mouse\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Wireless Mouse' })",
+        "description": "role=button name=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Wireless Mouse' })",
+        "description": "role=link name=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'Wireless Mouse' })",
+        "description": "role=textbox name=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'Wireless Mouse' })",
+        "description": "role=checkbox name=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'Wireless Mouse' })",
+        "description": "role=combobox name=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Wireless Mouse')",
+        "description": "label=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Wireless Mouse')",
+        "description": "placeholder=\"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('wireless-mouse')",
+        "description": "data-testid=\"wireless-mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#wireless-mouse')",
+        "description": "css id=\"#wireless-mouse\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('Wireless Mouse')",
+      "description": "text=\"Wireless Mouse\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-02.png"
+  }
+]

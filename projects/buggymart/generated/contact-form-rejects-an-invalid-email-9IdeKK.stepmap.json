@@ -1,0 +1,43 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to http://localhost:4799/contact",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to http://localhost:4799/contact"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "fill name with \"Jordan\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: fill name with \"Jordan\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "fill email with \"not-an-email\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: fill email with \"not-an-email\""
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "fill message with \"Hello there\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 3: fill message with \"Hello there\""
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "click the Send button",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 4: click the Send button"
+  },
+  {
+    "stepIndex": 5,
+    "sentence": "expect the contact result to show \"valid email\"",
+    "usedAi": false,
+    "locatorStrategy": "text",
+    "stepTitle": "Step 5: expect the contact result to show \"valid email\""
+  }
+]

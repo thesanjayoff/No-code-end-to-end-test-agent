@@ -1,0 +1,437 @@
+[
+  {
+    "index": 1,
+    "sentence": "fill name with \"Jordan\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "name",
+    "data": "Jordan",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('textbox', { name: 'name' })",
+      "description": "role=textbox name=\"name\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'name' })",
+        "description": "role=textbox name=\"name\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('name')",
+        "description": "label=\"name\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('name')",
+        "description": "text=\"name\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#name')",
+        "description": "css id=\"#name\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'name' })",
+        "description": "role=button name=\"name\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'name' })",
+        "description": "role=link name=\"name\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'name' })",
+        "description": "role=checkbox name=\"name\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'name' })",
+        "description": "role=combobox name=\"name\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('name')",
+        "description": "placeholder=\"name\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('name')",
+        "description": "data-testid=\"name\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-01.png",
+    "usedAi": false
+  },
+  {
+    "index": 2,
+    "sentence": "fill email with \"not-an-email\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "email",
+    "data": "not-an-email",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('textbox', { name: 'email' })",
+      "description": "role=textbox name=\"email\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'email' })",
+        "description": "role=textbox name=\"email\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('email')",
+        "description": "label=\"email\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('email')",
+        "description": "text=\"email\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#email')",
+        "description": "css id=\"#email\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'email' })",
+        "description": "role=button name=\"email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'email' })",
+        "description": "role=link name=\"email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'email' })",
+        "description": "role=checkbox name=\"email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'email' })",
+        "description": "role=combobox name=\"email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('email')",
+        "description": "placeholder=\"email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('email')",
+        "description": "data-testid=\"email\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-02.png",
+    "usedAi": false
+  },
+  {
+    "index": 3,
+    "sentence": "fill message with \"Hello there\"",
+    "kind": "action",
+    "action": "fill",
+    "warnings": [],
+    "targetDescription": "message",
+    "data": "Hello there",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('textbox', { name: 'message' })",
+      "description": "role=textbox name=\"message\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'message' })",
+        "description": "role=textbox name=\"message\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('message')",
+        "description": "label=\"message\"",
+        "confidence": 0.9
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('message')",
+        "description": "text=\"message\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#message')",
+        "description": "css id=\"#message\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'message' })",
+        "description": "role=button name=\"message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'message' })",
+        "description": "role=link name=\"message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'message' })",
+        "description": "role=checkbox name=\"message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'message' })",
+        "description": "role=combobox name=\"message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('message')",
+        "description": "placeholder=\"message\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('message')",
+        "description": "data-testid=\"message\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-03.png",
+    "usedAi": false
+  },
+  {
+    "index": 4,
+    "sentence": "click the Send button",
+    "kind": "action",
+    "action": "click",
+    "warnings": [],
+    "targetDescription": "the Send button",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('button', { name: 'Send' })",
+      "description": "role=button name=\"Send\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Send' })",
+        "description": "role=button name=\"Send\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Send')",
+        "description": "text=\"Send\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Send')",
+        "description": "label=\"Send\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Send')",
+        "description": "placeholder=\"Send\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('send')",
+        "description": "data-testid=\"send\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#send')",
+        "description": "css id=\"#send\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-04.png",
+    "usedAi": false
+  },
+  {
+    "index": 5,
+    "sentence": "expect the contact result to show \"valid email\"",
+    "kind": "assertion",
+    "action": "expect_text",
+    "warnings": [],
+    "targetDescription": "the contact result",
+    "expected": "valid email",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "text",
+        "code": "getByText('valid email')",
+        "description": "text=\"valid email\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#contact-result')",
+        "description": "css id=\"#contact-result\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'contact result' })",
+        "description": "role=button name=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'contact result' })",
+        "description": "role=link name=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'contact result' })",
+        "description": "role=textbox name=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'contact result' })",
+        "description": "role=checkbox name=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'contact result' })",
+        "description": "role=combobox name=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'valid email' })",
+        "description": "role=button name=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'valid email' })",
+        "description": "role=link name=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'valid email' })",
+        "description": "role=textbox name=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'valid email' })",
+        "description": "role=checkbox name=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'valid email' })",
+        "description": "role=combobox name=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('contact result')",
+        "description": "label=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('valid email')",
+        "description": "label=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('contact result')",
+        "description": "placeholder=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('valid email')",
+        "description": "placeholder=\"valid email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('contact-result')",
+        "description": "data-testid=\"contact-result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('valid-email')",
+        "description": "data-testid=\"valid-email\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('contact result')",
+        "description": "text=\"contact result\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#valid-email')",
+        "description": "css id=\"#valid-email\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "text",
+      "code": "getByText('valid email')",
+      "description": "text=\"valid email\"",
+      "confidence": 0.6
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-05.png"
+  }
+]

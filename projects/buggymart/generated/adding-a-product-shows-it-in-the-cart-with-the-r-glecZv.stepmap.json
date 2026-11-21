@@ -1,0 +1,35 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to http://localhost:4799/?variant=baseline",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to http://localhost:4799/?variant=baseline"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "click \"Add to cart\" for \"Wireless Mouse\"",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: click \"Add to cart\" for \"Wireless Mouse\""
+  },
+  {
+    "stepIndex": 2,
+    "sentence": "click the Cart link",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 2: click the Cart link"
+  },
+  {
+    "stepIndex": 3,
+    "sentence": "expect the cart total to show \"$19.99\"",
+    "usedAi": false,
+    "stepTitle": "Step 3: expect the cart total to show \"$19.99\""
+  },
+  {
+    "stepIndex": 4,
+    "sentence": "expect the Checkout button to be enabled",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 4: expect the Checkout button to be enabled"
+  }
+]

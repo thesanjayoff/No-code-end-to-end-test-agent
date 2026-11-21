@@ -1,0 +1,8 @@
+title: Home page shows the product list
+startUrl: /?variant=baseline
+environment: local
+tags:
+  - smoke
+steps:
+  - expect the Shop heading to be visible
+  - expect "Wireless Mouse" to be visible

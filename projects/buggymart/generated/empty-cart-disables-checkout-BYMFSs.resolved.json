@@ -1,0 +1,57 @@
+[
+  {
+    "index": 1,
+    "sentence": "expect the Checkout button to be disabled",
+    "kind": "assertion",
+    "action": "expect_disabled",
+    "warnings": [],
+    "targetDescription": "the Checkout button",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Checkout' })",
+        "description": "role=button name=\"Checkout\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Checkout')",
+        "description": "text=\"Checkout\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Checkout')",
+        "description": "label=\"Checkout\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Checkout')",
+        "description": "placeholder=\"Checkout\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('checkout')",
+        "description": "data-testid=\"checkout\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#checkout')",
+        "description": "css id=\"#checkout\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('button', { name: 'Checkout' })",
+      "description": "role=button name=\"Checkout\"",
+      "confidence": 0.95
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-01.png"
+  }
+]

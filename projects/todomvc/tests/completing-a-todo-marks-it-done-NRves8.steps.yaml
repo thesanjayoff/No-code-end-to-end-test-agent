@@ -1,0 +1,10 @@
+title: Completing a todo marks it done
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill "What needs to be done?" with "Walk the dog"
+  - press Enter
+  - check "Walk the dog"
+  - expect "Walk the dog" to be visible

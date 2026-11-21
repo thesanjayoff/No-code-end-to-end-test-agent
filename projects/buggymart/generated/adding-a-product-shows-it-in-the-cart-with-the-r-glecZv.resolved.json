@@ -1,0 +1,327 @@
+[
+  {
+    "index": 1,
+    "sentence": "click \"Add to cart\" for \"Wireless Mouse\"",
+    "kind": "action",
+    "action": "click",
+    "warnings": [],
+    "targetDescription": "Add to cart",
+    "contextDescription": "Wireless Mouse",
+    "locator": {
+      "strategy": "role",
+      "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByRole('button', { name: 'Add to cart' })",
+      "description": "role=button name=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByRole('button', { name: 'Add to cart' })",
+        "description": "role=button name=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "text",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByText('Add to cart')",
+        "description": "text=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByRole('link', { name: 'Add to cart' })",
+        "description": "role=link name=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByRole('textbox', { name: 'Add to cart' })",
+        "description": "role=textbox name=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByRole('checkbox', { name: 'Add to cart' })",
+        "description": "role=checkbox name=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByRole('combobox', { name: 'Add to cart' })",
+        "description": "role=combobox name=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByLabel('Add to cart')",
+        "description": "label=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByPlaceholder('Add to cart')",
+        "description": "placeholder=\"Add to cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).getByTestId('add-to-cart')",
+        "description": "data-testid=\"add-to-cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator(\"li, tr, [class*=\\\"item\\\" i], [class*=\\\"product\\\" i], [class*=\\\"row\\\" i], [class*=\\\"card\\\" i]\").filter({ hasText: \"Wireless Mouse\" }).locator('#add-to-cart')",
+        "description": "css id=\"#add-to-cart\" within an item containing \"Wireless Mouse\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-01.png",
+    "usedAi": false
+  },
+  {
+    "index": 2,
+    "sentence": "click the Cart link",
+    "kind": "action",
+    "action": "click",
+    "warnings": [],
+    "targetDescription": "the Cart link",
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('link', { name: 'Cart' })",
+      "description": "role=link name=\"Cart\"",
+      "confidence": 0.95
+    },
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'Cart' })",
+        "description": "role=link name=\"Cart\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Cart')",
+        "description": "label=\"Cart\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Cart')",
+        "description": "placeholder=\"Cart\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('cart')",
+        "description": "data-testid=\"cart\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Cart')",
+        "description": "text=\"Cart\"",
+        "confidence": 0.036
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#cart')",
+        "description": "css id=\"#cart\"",
+        "confidence": 0
+      }
+    ],
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-02.png",
+    "usedAi": false
+  },
+  {
+    "index": 3,
+    "sentence": "expect the cart total to show \"$19.99\"",
+    "kind": "assertion",
+    "action": "expect_text",
+    "warnings": [],
+    "targetDescription": "the cart total",
+    "expected": "$19.99",
+    "resolutionOk": false,
+    "resolutionNote": "Could not find a unique, stable element for \"the cart total\". Best guess: css id=\"#cart-total\" (confidence 0.30).",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "css",
+        "code": "locator('#cart-total')",
+        "description": "css id=\"#cart-total\"",
+        "confidence": 0.3
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('$19.99')",
+        "description": "text=\"$19.99\"",
+        "confidence": 0.09
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'cart total' })",
+        "description": "role=button name=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: 'cart total' })",
+        "description": "role=link name=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: 'cart total' })",
+        "description": "role=textbox name=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: 'cart total' })",
+        "description": "role=checkbox name=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: 'cart total' })",
+        "description": "role=combobox name=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: '$19.99' })",
+        "description": "role=button name=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('link', { name: '$19.99' })",
+        "description": "role=link name=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('textbox', { name: '$19.99' })",
+        "description": "role=textbox name=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('checkbox', { name: '$19.99' })",
+        "description": "role=checkbox name=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "role",
+        "code": "getByRole('combobox', { name: '$19.99' })",
+        "description": "role=combobox name=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('cart total')",
+        "description": "label=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('$19.99')",
+        "description": "label=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('cart total')",
+        "description": "placeholder=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('$19.99')",
+        "description": "placeholder=\"$19.99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('cart-total')",
+        "description": "data-testid=\"cart-total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('19-99')",
+        "description": "data-testid=\"19-99\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('cart total')",
+        "description": "text=\"cart total\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#19-99')",
+        "description": "css id=\"#19-99\"",
+        "confidence": 0
+      }
+    ],
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-03.png"
+  },
+  {
+    "index": 4,
+    "sentence": "expect the Checkout button to be enabled",
+    "kind": "assertion",
+    "action": "expect_enabled",
+    "warnings": [],
+    "targetDescription": "the Checkout button",
+    "usedAi": false,
+    "candidates": [
+      {
+        "strategy": "role",
+        "code": "getByRole('button', { name: 'Checkout' })",
+        "description": "role=button name=\"Checkout\"",
+        "confidence": 0.95
+      },
+      {
+        "strategy": "text",
+        "code": "getByText('Checkout')",
+        "description": "text=\"Checkout\"",
+        "confidence": 0.6
+      },
+      {
+        "strategy": "label",
+        "code": "getByLabel('Checkout')",
+        "description": "label=\"Checkout\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "placeholder",
+        "code": "getByPlaceholder('Checkout')",
+        "description": "placeholder=\"Checkout\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "testid",
+        "code": "getByTestId('checkout')",
+        "description": "data-testid=\"checkout\"",
+        "confidence": 0
+      },
+      {
+        "strategy": "css",
+        "code": "locator('#checkout')",
+        "description": "css id=\"#checkout\"",
+        "confidence": 0
+      }
+    ],
+    "locator": {
+      "strategy": "role",
+      "code": "getByRole('button', { name: 'Checkout' })",
+      "description": "role=button name=\"Checkout\"",
+      "confidence": 0.95
+    },
+    "resolutionOk": true,
+    "screenshotPath": "D:\\No-code end-to-end test agent\\projects\\buggymart\\runs\\authoring\\screenshots\\step-04.png"
+  }
+]

@@ -1,0 +1,7 @@
+title: Empty cart disables checkout
+startUrl: /cart?variant=baseline
+environment: local
+tags:
+  - cart
+steps:
+  - expect the Checkout button to be disabled

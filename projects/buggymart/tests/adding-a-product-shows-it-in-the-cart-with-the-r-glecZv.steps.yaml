@@ -1,0 +1,11 @@
+title: Adding a product shows it in the cart with the right total
+startUrl: /?variant=baseline
+environment: local
+tags:
+  - smoke
+  - cart
+steps:
+  - click "Add to cart" for "Wireless Mouse"
+  - click the Cart link
+  - expect the cart total to show "$19.99"
+  - expect the Checkout button to be enabled

@@ -1,0 +1,11 @@
+title: Contact form rejects an invalid email
+startUrl: /contact
+environment: local
+tags:
+  - forms
+steps:
+  - fill name with "Jordan"
+  - fill email with "not-an-email"
+  - fill message with "Hello there"
+  - click the Send button
+  - expect the contact result to show "valid email"

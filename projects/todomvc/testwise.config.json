@@ -1,0 +1,15 @@
+{
+  "id": "todomvc",
+  "name": "TodoMVC",
+  "allowedDomains": [
+    "todomvc.com"
+  ],
+  "environments": {
+    "local": {
+      "baseUrl": "https://todomvc.com/examples/react/dist/"
+    }
+  },
+  "defaultEnvironment": "local",
+  "productionDomains": [],
+  "createdAt": "2026-11-21T16:04:47.491Z"
+}

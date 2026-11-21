@@ -1,0 +1,15 @@
+[
+  {
+    "stepIndex": 0,
+    "sentence": "go to http://localhost:4799/cart?variant=baseline",
+    "usedAi": false,
+    "stepTitle": "Step 0: go to http://localhost:4799/cart?variant=baseline"
+  },
+  {
+    "stepIndex": 1,
+    "sentence": "expect the Checkout button to be disabled",
+    "usedAi": false,
+    "locatorStrategy": "role",
+    "stepTitle": "Step 1: expect the Checkout button to be disabled"
+  }
+]

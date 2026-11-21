@@ -1,0 +1,9 @@
+title: Adding a todo shows it in the list
+startUrl: /
+environment: local
+tags:
+  - smoke
+steps:
+  - fill "What needs to be done?" with "Buy milk"
+  - press Enter
+  - expect "Buy milk" to be visible
